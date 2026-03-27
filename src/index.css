@@ -17,3 +17,10 @@
   --font-heading: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
 }
+
+.parallax-section {
+  background-image: url("/home.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}

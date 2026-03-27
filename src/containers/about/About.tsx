@@ -1,48 +1,74 @@
-import React from 'react';
-import './about.css';
-import Description from '../../components/description/Description';
+import React from "react";
+import Description from "../../components/Description";
 
-const About = () => (
-  <div
-    className="about"
-    id="about"
-  >
-    <div className="about-heading">
-      <h1>O inwestycji Apartamenty Kaktusowa</h1>
-      <p>To wyjątkowa Inwestycja w spokojnej okolicy gdzie przyroda spleciona jest z
-        tchnieniem nowoczesności. W tę piękną przestrzeń, zanurzoną w urokach natury, zaczynamy naszą
-        ekscytującą podróż do nowego mieszkania, które przyniesie nowe życie i inspirację. To będzie oaza
-        spokoju, harmonii i nowoczesności, która zdefiniuje nowy standard życia dla mieszkańców tego urokliwego
-        zakątka.
-        Inwestycja jest podzielona na trzy etapy, a każdy z nich będzie owocował nowym starannie zaprojektowanym
-        budynkiem, wybudowanym z dbałością o najdrobniesze szczegóły aby zapewnić doskonałe warunki dla
-        przyszłych mieszkańców. Wszystkie trzy etapy będą sie składać na malowniczą zabudowę w kształcie litery
-        C z piękną, zieloną przestrzenią wspólną na froncie.
-      </p>
-    </div>
-    <div className="about-container">
-      <Description
-        title="Dostęp i parking"
-        img="car.jpg"
-        alt="Samochód na drodze"
-        text="Doskonale zaplanowane drogi dojazdowe umożliwiają wygodne i bezproblemowe dotarcie do twojego przyszłego domu. Natężenie ruchu jest minimalne, co przyczynia się do spokojnej atmosfery w okolicy. Twoje potrzeby i komfort są dla nas najważniejsze, dlatego stworzyliśmy idealne warunki dla Twojego samochodu.Na terenie inwestycji znajdziesz zarówno parking zewnętrzny, jak i podziemny, zapewniające bezpieczne i wygodne miejsca do parkowania. "
-      />
+const About = () => {
+  return (
+    <section id="about">
 
-      <Description
-        title="Różnorodność"
-        img="window.jpg"
-        alt="Okno z dekoracjami na parapecie"
-        text="Przestronne apartamenty będą obfitować w naturalne światło, które wtapiając się w przestrzeń, podkreśli piękno wnętrza. Wykorzystanie wysokiej jakości materiałów i nowoczesnych technologii zapewni nie tylko niezrównane piękno, ale także trwałość i energooszczędność. Zamysłem projetu było stworzenie mieszkań o maksymalnym komforcie i wygodzie, zapewniając mieszkańcom doskonałe warunki do życia."
-      />
+      {/* STICKY HERO */}
+      <div className="relative h-[70vh] min-h-[500px] overflow-hidden">
 
-      <Description
-        title="Natura"
-        img="jogging.jpg"
-        alt="Kobieta uprawiająca jogging"
-        text=" Lokalizacja tej inwestycji jest absolutnie wyjątkowa. Bliskość zabytkowego parku oraz rozciągającego się w pobliżu lasu sprawiają, że mieszkańcy będą mieli nieograniczony dostęp do natury i spokojnych terenów rekreacyjnych. Możliwość relaksu na świeżym powietrzu, spacery i aktywność fizyczna stanie się integralną częścią codziennego życia, co zapewni harmonię i równowagę między aktywnym stylem życia a chwilami wytchnienia"
-      />
-    </div>
-  </div>
-);
+        <div className="parallax-section min-h-[70vh] flex items-center"/>
+
+          {/* OVERLAY */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/30" >
+
+          {/* CONTENT */}
+          <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 h-full flex flex-col justify-center text-white">
+
+            <h2 className="font-[var(--font-heading)] text-3xl md:text-5xl mb-6 drop-shadow-lg">
+              O inwestycji Apartamenty Kaktusowa
+            </h2>
+
+            <p className="text-lg md:text-xl leading-relaxed max-w-2xl drop-shadow-md">
+              Wyjątkowa inwestycja w spokojnej okolicy, gdzie przyroda spotyka się
+              z nowoczesnością. Tworzymy przestrzeń pełną harmonii, komfortu i wysokiego standardu życia.
+            </p>
+              <div className="max-w-3xl mb-16">
+                <p className="pt-10 text-lg leading-relaxed">
+                  Inwestycja podzielona jest na trzy etapy, obejmujące starannie zaprojektowane budynki,
+                  tworzące spójną i estetyczną zabudowę z zieloną przestrzenią wspólną.
+                </p>
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-[var(--color-bg-soft)] py-20 lg:py-28">
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+            <Description
+              title="Dostęp i parking"
+              img="car.jpg"
+              alt="Samochód na drodze"
+              text="Wygodne drogi dojazdowe oraz parking zewnętrzny i podziemny zapewniają komfort i bezpieczeństwo."
+            />
+
+            <Description
+              title="Różnorodność"
+              img="window.jpg"
+              alt="Okno"
+              text="Przestronne mieszkania z dużą ilością światła i wysoką jakością wykonania."
+            />
+
+            <Description
+              title="Natura"
+              img="jogging.jpg"
+              alt="Jogging"
+              text="Bliskość terenów zielonych sprzyja aktywnemu i spokojnemu stylowi życia."
+            />
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default About;
