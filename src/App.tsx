@@ -1,8 +1,9 @@
 import { Routes, Route, Router } from 'react-router-dom';
 import { Admin, Footer, Blog, Offer, Features, Header, About } from './containers';
-import { Location, Navbar } from './components';
+import { Location } from './components';
 
 import './App.css';
+import Navbar from './components/Navbar';
 
 const App = () => (
   <>

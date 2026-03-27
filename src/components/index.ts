@@ -2,7 +2,6 @@
 export { default as Article } from './article/Article';
 export { default as Location } from './location/Location';
 export { default as Description } from './description/Description';
-export { default as Navbar } from './navbar/Navbar';
 export { default as OfferTable } from './offerTable/OfferTable';
 export { default as OfferDetails } from './offerDetalils/OfferDetails';
 export { default as OfferPicture } from './offerPicture/OfferPicture';
