@@ -1,0 +1,42 @@
+.admin-form__popup{
+    width: 700px;
+    position: absolute;
+    top:25%;
+    left: 30%;
+    border: 1px solid black;
+    border-radius: 5%;
+    box-shadow: 3px 3px 10px darkslategray;
+    padding: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-family: var(--font-sans);
+    z-index: 99;
+    background-color: #fff;
+}
+.admin-form__popup p{
+    line-height: 30px;
+}
+
+.admin-form__popup table{
+    border: 2px solid white;
+    width: 100%;
+    margin:20px 0;
+}
+.admin-form__popup table thead{
+    background-color: rgba(128, 128, 128, 0.53);
+}
+.admin-form__popup table thead th,
+.admin-form__popup table tbody td{
+    padding:5px;
+}
+.admin-form__popup table tbody td{
+    background-color: lightgray;
+}
+.admin-form__popup button{
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.admin-form__popup button:nth-child(2n-2){
+    background-color: rgba(56, 148, 2, 0.49);
+}

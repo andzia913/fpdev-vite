@@ -1,0 +1,9 @@
+.admin-container{
+    font-family: var(--font-family);
+}
+.admin-container h1{
+    font-family: var(--font-family);
+    padding: 50px 0;
+    text-align: center;
+}
+

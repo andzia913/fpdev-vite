@@ -1,0 +1,74 @@
+.admin-forms__log-info{
+    position: absolute;
+    right:0;
+    top:0;
+    font-family: var(--font-family);
+    padding: 25px;
+    text-align: center;
+}
+.admin-forms__log-info button{
+    padding: 5px 10px;
+    margin: 10px auto;
+
+}
+.admin-forms__container{
+    text-align: center;
+    font-size: 18px;
+}
+
+.admin-forms__container h3{
+    margin: 10px
+}
+
+.admin-forms__container select{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+}
+.admin-forms__container__flat-info{
+    width: 400px;
+    margin: 10px auto;
+    border: 1px solid lightgray;
+    box-shadow: 3px 3px 5px lightgray;
+    padding: 10px;
+}
+.admin-forms__container__flat-info div p{
+    display: inline-block;
+    width: 45%;
+    margin: 4px 0;
+}
+
+.admin-forms__container__flat-info div p:first-child{
+    text-align: right;
+    padding-right: 10px;
+}
+.admin-forms__container__flat-info div p:nth-child(2n){
+    text-align: left;
+    font-weight: 800;
+}
+.admin-forms__container__flat-info div input{
+    padding: 5px
+}
+.admin-forms__container__flat-info button{
+    padding: 5px 10px;
+    margin:10px
+
+}
+.admin-forms__container__date-form,
+.admin-forms__container__diary-form{
+    padding: 20px;
+    border: solid grey 1px 1px
+}
+.admin-forms__container__date-form input,
+.admin-forms__container__diary-form input{
+    padding: 5px;
+    margin: 10px
+}
+.admin-forms__container__date-form button,
+.admin-forms__container__diary-form button,
+.admin-forms__container__diary-form textarea,
+.admin-forms__container__diary-form select{
+    padding: 5px 10px;
+    margin:10px
+}

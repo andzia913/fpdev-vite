@@ -1,0 +1,146 @@
+
+.fp__features_element {
+    display: flex;
+    align-items: stretch;
+    position: relative;
+    width: 100%;
+    height:40vh;
+    background-color: #fff;
+    overflow: hidden;
+}
+.fp__features_element:nth-child(2n) {
+    flex-direction: row-reverse;
+}
+
+.fp__features_element h2 {
+    z-index: 1;
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    bottom: 10px;
+    right: 40%;
+    font-size: 45px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 1px 1px 0 black;
+}
+.fp__features_element:nth-child(2n) h2{
+    right: auto;
+    left: 40%;
+}
+
+.fp__features_element p {
+    width: 38%;
+    z-index: 1;
+    color: var(--color-ant);
+    padding: 30px;
+    font-size: 19px;
+    letter-spacing: 1px;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    width: content-box;
+}
+.fp__features_element-img {
+    display: flex;
+    flex-grow: 3;
+    filter: grayscale(100%);
+}
+.fp__features_element:hover i {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    transition-duration: 0.5s;
+    right: 20%;
+}
+
+.fp__features_element button {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    width: 60px;
+    height: 60px;
+    background-color: #a85114;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    mix-blend-mode: hard-light;
+}
+.fp__features_element:nth-child(2n) button {
+    right: auto;
+    left: 50px;
+}
+
+.fp__features_element button i {
+    font-size: 3rem;
+}
+.fp__features_element:hover button {
+    transform: scale(25);
+}
+.fp__features_element:hover p {
+    color: #fff;
+}
+.fp__features_element:hover .fp__features_element-img {
+    filter: grayscale(0);
+}
+
+@media screen and (max-width: 1050px) {
+    .fp__features_element{
+        display: block;
+        overflow: hidden;
+        flex-wrap: wrap;
+        height: auto;
+        margin-bottom: 5px;
+        max-width: 100vw;
+    }
+    .fp__features_element h2,.fp__features_element:nth-child(2n) h2 {
+        z-index: 4;
+        top:10px;
+        left:10%;
+        font-size: 30px;
+        width:90%;
+    }
+
+    .fp__features_element p{
+        font-size: 16px;
+        flex-grow: 1;
+        z-index: 3;
+        padding: 20px 15px 50px;
+        width: 100%;
+        text-align: justify;
+
+    }
+    .fp__features_element-img{
+        flex-grow: 0;
+        border-radius: 30px 30px 0 0 ;
+        filter: grayscale(0);
+        z-index: 2;
+        height: fit-content;
+        max-width: 100%;
+    }
+    .fp__features_element button,
+    .fp__features_element:nth-child(2n) button {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        opacity: 80%;
+    }
+    .fp__features_element:nth-child(2n-1) button{
+        width: 0;
+        height: 0;
+    }
+
+    .fp__features_element:hover button {
+        transform: none;
+    }
+    .fp__features_element:hover p {
+        color: var(--color-ant);
+    }
+
+    .fp__features_element:hover .fp__features_element-img {
+        filter: none;
+    }
+
+}

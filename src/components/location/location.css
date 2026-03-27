@@ -1,0 +1,120 @@
+.fp__location {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.fp__location-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: #fff;
+    width: 30%;
+}
+.fp__location-content div{
+    margin-top: 20px;
+}
+.fp__location-content h3 {
+    font-family: var(--font-family);
+    font-size: 23px;
+    line-height: 45px;
+    font-weight: 800;
+    color: var(--color-orange);
+    position: relative;
+    width: content-box;
+}
+.fp__location-content h3:before{
+    content: '';
+    top:0;
+    left: -10px;
+    width: 10%;
+    height: 90%;
+    border-top: 5px solid var(--color-orange);
+    border-left: 5px solid var(--color-orange);
+    position: absolute;
+    z-index: 1;
+}
+.fp__location p,
+.fp__location address{
+    font-family: var(--font-family);
+    color: var(--color-dark);
+    font-size: 18px;
+    font-weight: 500;
+    font-style: normal;
+}
+.fp__location-link{
+    font-family: var(--font-family);
+    color: var(--color-dark);
+    display: block;
+    width: 100%;
+    font-size:18px;
+    padding: 5px 0;
+
+}
+.fp__location .contact-button{
+    display: inline-block;
+    border: 2px solid var(--color-orange);
+    padding: 10px;
+    color:var(--color-orange);
+    font-size: 16px;
+    margin-top: 5px;
+}
+.fp__location .contact-button i{
+    padding-right: 10px;
+}
+
+
+@media screen and (max-width: 1050px) {
+    .fp__location{
+        flex-direction: column;
+        align-content: center;
+    }
+    .fp__location-content{
+        flex-direction: row;
+        width: unset;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-bottom: 50px;
+        align-items: center;
+    }
+    .fp__location-content div{
+        width: 25%;
+    }
+    .fp__location-content h3 {
+        font-size: 18px;
+    }
+    .fp__location p,
+    .fp__location address,
+    .fp__location-link{
+        font-size: 14px;
+    }
+    .fp__location .contact-button{
+        padding: 5px;
+        font-size: 14px;
+    }
+    .fp__location-map{
+        border: 6px solid var(--color-orange);
+        padding: 2px;
+        overflow: hidden;
+        margin: 0;
+    }
+}
+@media screen and (max-width: 550px) {
+    .fp__location{
+        align-items: baseline;
+    }
+    .fp__location-content{
+        flex-direction: column;
+        align-items: unset;
+        margin: 0 auto 50px;
+    }
+    .fp__location-content div{
+        width: fit-content;
+    }
+    .fp__location-map{
+        margin: 0 auto 50px;
+    }
+}
+

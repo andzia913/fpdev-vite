@@ -1,0 +1,35 @@
+.offer-details{
+    margin: 50px 100px;
+    font-family: var(--font-family);
+    border-bottom: solid 2px var(--color-orange);
+}
+
+
+.offer-details__stages h3{
+    margin-top: 15px;
+}
+
+
+.offer-details__stages h3 span {
+    color: var(--color-orange)
+}
+
+.offer-details__standard{
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 1050px) {
+    .offer-details {
+        margin: 50px 50px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .offer-details {
+        margin: 25px;
+    }
+    .offer-details__stages h2{
+        font-size: 18px;
+        line-height: 20px;
+    }
+}

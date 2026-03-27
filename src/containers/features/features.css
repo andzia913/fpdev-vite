@@ -1,0 +1,27 @@
+.fp__features {
+    width: 100%;
+    overflow: hidden;
+}
+
+.fp__features-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+@media screen and (max-width: 750px) {
+    .fp__features {
+        width: 90%;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .fp__features {
+        width: 90%;
+        overflow: hidden;
+    }
+}

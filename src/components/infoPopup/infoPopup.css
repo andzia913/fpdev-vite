@@ -1,0 +1,39 @@
+.info-popup {
+    position: fixed;
+    top: 10%;
+    left: 40%;
+    width: 400px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    z-index: 1000;
+    opacity: 0.9;
+}
+
+.positive {
+    background-color: #5dbe8b; 
+}
+
+.negative {
+    background-color: #e57373; 
+}
+
+.popup-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.popup-text {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.close-button {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+}
