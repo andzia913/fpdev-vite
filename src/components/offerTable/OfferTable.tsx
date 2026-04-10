@@ -1,200 +1,225 @@
-/* eslint-disable jsx-a11y/control-has-associated-label,no-console,no-unused-vars */
-import React, { useContext, useEffect, useState } from 'react';
-import './offerTable.css';
-import { useTable, useFilters, usePagination, useSortBy } from 'react-table';
-import { collection, getDocs } from 'firebase/firestore';
-import { tableColumns } from './tableColumns.js';
-import { db } from '../../config/firebase';
-import { Spinner } from '../index';
-import useFlatsData from '../../utils/dataService.js';
+import React, { useEffect, useState } from "react";
+import useFlatsData from "../../utils/dataService";
+import { Spinner } from "../index";
+import OfferTableDesktop from "./OfferTableDesktop";
+import OfferTableMobile from "./OfferTableMobile";
+import type { Flat } from "../../types/flat";
 
-const OfferTable = (props: any) => {
-  const { flatsData } = useFlatsData();
-  const [flatsList, setFlatsList] = useState([]);
-  const [surfaceInputMax, setSurfaceInputMax] = useState(100);
-  const [surfaceInputMin, setSurfaceInputMin] = useState(0);
-  const [priceInputMax, setPriceInputMax] = useState(10000000);
-  const [priceInputMin, setPriceInputMin] = useState(0);
+const ITEMS_PER_PAGE = 6;
+
+
+
+const parseFlatNumber = (val: string) => {
+  const match = val.match(/M(\d+)([A-Z]?)/i);
+
+  if (!match) return { num: 0, letter: "" };
+
+  return {
+    num: Number(match[1]),
+    letter: match[2] || "",
+  };
+};
+
+const OfferTable = ({ changeOnOfferDetails }: any) => {
+  const { flatsData } = useFlatsData() as { flatsData: Flat[] };
+
+  const [filtered, setFiltered] = useState<Flat[]>([]);
+  const [page, setPage] = useState(0);
+
+  const [filters, setFilters] = useState({
+    status: "",
+    surfaceMin: "",
+    surfaceMax: "",
+    priceMin: "",
+    priceMax: "",
+  });
+
+  const [sort, setSort] = useState<{
+    key: keyof Flat;
+    direction: "asc" | "desc";
+  }>({
+    key: "numberOfFlat",
+    direction: "asc",
+  });
+
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // eslint-disable-next-line no-unused-expressions
-    flatsData.length > 1 ? setIsLoading(false) : setIsLoading(true);
+    if (flatsData.length > 0) {
+      setFiltered(flatsData);
+      setIsLoading(false);
+    }
   }, [flatsData]);
 
-  const columns = React.useMemo(() => tableColumns, []);
-  const data = React.useMemo(() => flatsData, [flatsData]);
+  // FILTER + SORT
+  useEffect(() => {
+    let data = [...flatsData];
 
-  const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canPreviousPage, canNextPage, pageOptions, state, gotoPage, prepareRow, setAllFilters, setFilter } = useTable({ columns, data }, useFilters, useSortBy, usePagination);
-  const { pageIndex } = state;
+    data = data.filter((flat) => {
+      const price = Number(flat.priceOfFlat.replace(".", ""));
+      const surface = Number(flat.surface);
+
+      return (
+        (!filters.status || flat.statute === filters.status) &&
+        (!filters.surfaceMin || surface >= Number(filters.surfaceMin)) &&
+        (!filters.surfaceMax || surface <= Number(filters.surfaceMax)) &&
+        (!filters.priceMin || price >= Number(filters.priceMin)) &&
+        (!filters.priceMax || price <= Number(filters.priceMax))
+      );
+    });
+
+    data.sort((a, b) => {
+      const dir = sort.direction === "asc" ? 1 : -1;
+
+      if (!a || !b) return 0;
+
+      // PRICE
+      if (sort.key === "priceOfFlat") {
+        const priceA = Number(a.priceOfFlat?.replace(".", "") || 0);
+        const priceB = Number(b.priceOfFlat?.replace(".", "") || 0);
+        return (priceA - priceB) * dir;
+      }
+
+      // SURFACE
+      if (sort.key === "surface") {
+        const surfaceA = Number(a.surface || 0);
+        const surfaceB = Number(b.surface || 0);
+        return (surfaceA - surfaceB) * dir;
+      }
+
+      // 🔥 FLAT NUMBER (M7A)
+      if (sort.key === "numberOfFlat") {
+        const aParsed = parseFlatNumber(a.numberOfFlat);
+        const bParsed = parseFlatNumber(b.numberOfFlat);
+
+        if (aParsed.num !== bParsed.num) {
+          return (aParsed.num - bParsed.num) * dir;
+        }
+
+        return aParsed.letter.localeCompare(bParsed.letter) * dir;
+      }
+
+      // DEFAULT SAFE
+      const valA = String(a[sort.key] || "");
+      const valB = String(b[sort.key] || "");
+
+      return valA.localeCompare(valB) * dir;
+    });
+
+    setFiltered(data);
+    setPage(0);
+     console.log(flatsData)
+
+  }, [filters, sort, flatsData]);
+
+  const paginated = filtered.slice(
+    page * ITEMS_PER_PAGE,
+    (page + 1) * ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+
   const clearFilters = () => {
-    setAllFilters([]);
-    setSurfaceInputMin(0);
-    setSurfaceInputMax(100);
-    setPriceInputMin(0);
-    setPriceInputMax(10000000);
-    // eslint-disable-next-line no-param-reassign,no-return-assign
-    document.querySelectorAll('.table-filter').forEach((el:any) => el.value = '');
+    setFilters({
+      status: "",
+      surfaceMin: "",
+      surfaceMax: "",
+      priceMin: "",
+      priceMax: "",
+    });
   };
-  useEffect(() => {
-    setTimeout(clearFilters, 1000);
-  }, []);
 
-  useEffect(() => {
-    setFilter('surface', [surfaceInputMin, surfaceInputMax]);
-  }, [surfaceInputMin, surfaceInputMax]);
-  useEffect(() => {
-    setFilter('priceOfFlat', [priceInputMin, priceInputMax]);
-  }, [priceInputMin, priceInputMax]);
-  const changeOfferView = () => props.changeOnOfferDetails();
-
+  const toggleSort = (key: keyof Flat) => {
+    setSort((prev) => ({
+      key,
+      direction:
+        prev.key === key && prev.direction === "asc" ? "desc" : "asc",
+    }));
+  };
   return (
-    <div className="table-container">
-      <div className="table-container__filters">
-        <div>
-          <p>Dostępność:</p>
-          <select name="statuteSelect" className="table-filter" onChange={(e) => setFilter('statute', e.target.value)}>
-            <option value="">--Wybierz--</option>
-            <option value="dostępne">Dostępne</option>
-            <option value="rezerwacja">Rezerwacja</option>
-            <option value="sprzedane">Sprzedne</option>
-          </select>
-        </div>
-        <div>
-          <p>Wybierz piętro</p>
-          <select name="levelSelect" className="table-filter" onChange={(e) => setFilter('level', e.target.value)}>
-            <option value="">--Wybierz--</option>
-            <option value="parter">Parter</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </div>
-        <div>
-          <p>Liczba pokoi</p>
-          <select name="roomsSelect" className="table-filter" onChange={(e) => setFilter('numberOfRooms', e.target.value)}>
-            <option value="">--Wybierz--</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
-        <div>
-          <p>Powierzchnia</p> od:
-          <input
-            className="table-filter"
-            type="number"
-            defaultValue=""
-            max={100}
-            min={30}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurfaceInputMin(Number(e.target.value))}
-          />
-          do:
-          <input
-            className="table-filter"
-            type="number"
-            defaultValue=""
-            max={100}
-            min={40}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSurfaceInputMax(Number(e.target.value))}
-          />
-        </div>
-        <div>
-          <p>Cena </p>
-          od:
-          <input
-            className="table-filter"
-            type="number"
-            defaultValue=""
-            step={50000}
-            max={1000000}
-            min={300000}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPriceInputMin(Number(e.target.value))}
-          />
-          do:
-          <input
-            className="table-filter"
-            type="number"
-            defaultValue=""
-            step={50000}
-            max={1000000}
-            min={400000}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPriceInputMax(Number(e.target.value))}
-          />
-        </div>
-        <button className="table-button" type="button" onClick={() => clearFilters()}>Wyczyść filtry</button>
+    <div className="max-w-7xl mx-auto px-6 lg:px-10">
+
+      {/* FILTERS */}
+      <div className="bg-white p-6 rounded-lg shadow-sm mb-8 flex flex-wrap gap-4 items-end">
+        <select
+          value={filters.status}
+          onChange={(e) =>
+            setFilters({ ...filters, status: e.target.value })
+          }
+          className="border rounded px-3 py-2"
+        >
+          <option value="">Wszystkie</option>
+          <option value="dostępne">Dostępne</option>
+          <option value="rezerwacja">Rezerwacja</option>
+          <option value="sprzedane">Sprzedane</option>
+        </select>
+
+        <input
+          type="number"
+          placeholder="Pow. od"
+          className="border rounded px-3 py-2 w-24"
+          onChange={(e) =>
+            setFilters({ ...filters, surfaceMin: e.target.value })
+          }
+        />
+
+        <input
+          type="number"
+          placeholder="Pow. do"
+          className="border rounded px-3 py-2 w-24"
+          onChange={(e) =>
+            setFilters({ ...filters, surfaceMax: e.target.value })
+          }
+        />
+
+        <input
+          type="number"
+          placeholder="Cena od"
+          className="border rounded px-3 py-2 w-28"
+          onChange={(e) =>
+            setFilters({ ...filters, priceMin: e.target.value })
+          }
+        />
+
+        <input
+          type="number"
+          placeholder="Cena do"
+          className="border rounded px-3 py-2 w-28"
+          onChange={(e) =>
+            setFilters({ ...filters, priceMax: e.target.value })
+          }
+        />
+
+        <button
+          onClick={clearFilters}
+          className="ml-auto bg-[var(--color-primary)] text-white px-5 py-2 rounded"
+        >
+          Wyczyść
+        </button>
       </div>
 
-      {isLoading ? <Spinner />
-        : (
-          <table {...getTableProps()}>
-            <thead>
-              {headerGroups.map((headerGroup: any) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map((column: any) => (
-                    <th
-                      key={column.accessor}
-                      {...column.getHeaderProps(column.getSortByToggleProps())}
-                    >
-                      {column.render('Header')}
-                      <span>
-                        {column.sortable ? (column.isSorted ? (column.isSortedDesc
-                          ? <i className="fa-solid fa-sort-up" /> : <i className="fa-solid fa-sort-down" />)
-                          : <i className="fa-solid fa-sort" />) : ''}
-                      </span>
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody {...getTableBodyProps()}>
-              {page.length < 1 ? (
-                <tr>
-                  <td colSpan={9}>
-                    <span className="table-notification">Niestety nie znaleziono mieszkań spełaniających kryteria <br /> <button className="table-button" type="button" onClick={() => clearFilters()}>Wyczyść filtry</button>
-                      lub
-                      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                      <button className="table-button" type="button" onClick={() => changeOfferView()}>Sprawdź</button> mieszkania dostęne w kolejnych etapach
-                    </span>
-                  </td>
-                </tr>
-              ) : ''}
-              {page.map((row: any) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()} className={`${row.cells[6].value === 'dostępne' ? '' : 'status-not-available'}`}>
-                    {row.cells.map((cell: any) => (
-                      <td data-heading={cell.column.Header} {...cell.getCellProps()}> {cell.render('Cell')} </td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-      <div className="offer-container__table-pagination">
-        <div>
-          <button
-            type="button"
-            onClick={() => previousPage()}
-            disabled={!canPreviousPage}
-          >
-            <i className="fa-solid fa-caret-left" />
-          </button>
-          {pageOptions.map((el :any, index: number) => <button type="button" key={index} className={`${pageIndex === el ? 'active-page' : ''}`} onClick={() => gotoPage(el)}>{el + 1}</button>)}
-          <button
-            type="button"
-            onClick={() => nextPage()}
-            disabled={!canNextPage}
-          >{window.innerWidth < 550 ? ' ' : 'Następna'} <i className="fa-solid fa-caret-right" />
-          </button>
-        </div>
-      </div>
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <div className="hidden md:block">
+            <OfferTableDesktop
+              data={paginated}
+              toggleSort={toggleSort}
+              sort={sort}
+              page={page}
+              setPage={setPage}
+              totalPages={totalPages}
+            />
+          </div>
+
+          <div className="md:hidden">
+            <OfferTableMobile data={paginated} />
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
 export default OfferTable;
-

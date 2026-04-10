@@ -1,6 +1,6 @@
 import { fetchFlatsData } from './firebaseService';
 
-let cachedFlatsStatuteInfo = null;
+let cachedFlatsStatuteInfo:any = null;
 
 const avabilityOfFlatsData = async () => {
   if(cachedFlatsStatuteInfo !== null){
@@ -19,9 +19,9 @@ const avabilityOfFlatsData = async () => {
   }
 };
 
-const checkStatuteOfFlat = async (currFlatNum) => {
+const checkStatuteOfFlat = async (currFlatNum: string) => {
   const flatsStatuteInfo = await avabilityOfFlatsData();
-  const currFlat = flatsStatuteInfo.find((flat) => flat.numberOfFlat === currFlatNum);
+  const currFlat = flatsStatuteInfo.find((flat:any) => flat.numberOfFlat === currFlatNum);
   if (currFlat) {
     const currStatute = currFlat.statute;
     if (currStatute === 'dostępne') {
@@ -34,8 +34,8 @@ const checkStatuteOfFlat = async (currFlatNum) => {
   return null;
 };
 
-const generateAreaProperties = async (flatId) => {
-  const isFlatAvailable = await checkStatuteOfFlat(flatId);
+const generateAreaProperties = async (flatId: string) => {
+  const isFlatAvailable =await checkStatuteOfFlat(flatId);
   return {
     disabled: !isFlatAvailable,
     preFillColor: isFlatAvailable ? undefined : 'rgba(12, 12, 12, 0.5)',
@@ -43,4 +43,4 @@ const generateAreaProperties = async (flatId) => {
   };
 };
 
-export default generateAreaProperties;
+export default await generateAreaProperties;

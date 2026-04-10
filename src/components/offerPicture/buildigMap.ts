@@ -9,7 +9,8 @@ const buildingMap = {
   src: 'visualization.jpg',
   areas: [
     {
-      id: groundFloor,
+      id: "groundFloor",
+      map: groundFloor,
       title: 'Parter',
       shape: 'poly',
       name: '1',

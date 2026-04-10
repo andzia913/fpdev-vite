@@ -1,4 +1,4 @@
-import generateAreaProperties from '../../utils/statusOfFlat';
+import  generateAreaProperties from '../../utils/statusOfFlat';
 
 const groundFloor = {
   name: 'groundFloor',
