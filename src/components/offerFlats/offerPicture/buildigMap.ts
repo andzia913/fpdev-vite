@@ -22,7 +22,8 @@ const buildingMap = {
       ],
     },
     {
-      id: firstFloor,
+      id: "firstFloor",
+      map: firstFloor,
       title: 'Pierwsze-piętro',
       shape: 'poly',
       name: '2',
@@ -51,7 +52,8 @@ const buildingMap = {
       ],
     },
     {
-      id: secondFloor,
+      id: "secondFloor",
+      map: secondFloor,
       title: 'Drugie-piętro',
       shape: 'poly',
       name: '3',
@@ -79,7 +81,8 @@ const buildingMap = {
         ]],
     },
     {
-      id: thirdFloor,
+      id: "thirdFloor",
+      map: thirdFloor,
       title: 'Trzecie-piętro',
       shape: 'poly',
       name: '4',

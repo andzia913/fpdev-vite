@@ -2,7 +2,7 @@ import React, { useState, lazy, Suspense } from "react";
 import Spinner from "../components/spinner/Spinner";
 import { OfferTable } from "../components";
 
-const OfferPicture = lazy(() => import("../components/offerPicture/OfferPicture"));
+const OfferPicture = lazy(() => import("../components/offerFlats/offerPicture/OfferPicture"));
 const OfferDetails = lazy(() => import("../components/OfferDetails"));
 
 const Offer = () => {
@@ -26,7 +26,7 @@ const Offer = () => {
   };
 
   return (
-    <div className="offer-container section__margin" id="offer">
+    <section className="max-w-7xl mx-auto px-6 lg:px-10 py-20" id="offer">
       <div className="mb-10">
         <h2 className="text-2xl md:text-4xl font-semibold text-[var(--color-text)] mb-3 text-center">
           Sprawdź naszą ofertę mieszkań
@@ -88,7 +88,7 @@ const Offer = () => {
       <Suspense fallback={<Spinner />}>
         {renderView()}
       </Suspense>
-    </div>
+    </section>
   );
 };
 

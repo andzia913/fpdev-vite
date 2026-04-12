@@ -1,14 +1,23 @@
 import React, { useState, lazy, Suspense } from "react";
-import Article from "../../components/Article";
-import Spinner from "../../components/spinner/Spinner";
+import Spinner from "../components/spinner/Spinner";
+import Article from "../components/Article";
+import { useNavigate } from "react-router-dom";
 
 const ArticleContent = lazy(
-  () => import("../../components/ArticleContent")
+  () => import("../components/ArticleContent")
 );
 
 const Blog = () => {
   const [activeArticle, setActiveArticle] = useState<string | null>(null);
+  const navigate = useNavigate();
 
+  const handleArticleClick = (title: string) => {
+    if (title === "Wykończenie pod klucz") {
+      navigate("/wykonczenie-pod-klucz");
+    } else {
+      setActiveArticle(title);
+    }
+  };
   return (
     <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16" id="blog">
 
@@ -43,7 +52,7 @@ const Blog = () => {
       <Article
         imgUrl="/progress.jpeg"
         alt="postępy budowy"
-        handleActiveArticle={setActiveArticle}
+        handleActiveArticle={handleArticleClick}
         date="Dziennik budowy"
         text="Sprawdź postępy na budowie"
       />
@@ -53,7 +62,7 @@ const Blog = () => {
       <Article
         imgUrl="/designer.jpeg"
         alt="wykończenie"
-        handleActiveArticle={setActiveArticle}
+        handleActiveArticle={handleArticleClick}
         date="Wykończenie pod klucz"
         text="Gotowe mieszkanie przed odbiorem"
       />
@@ -63,7 +72,7 @@ const Blog = () => {
       <Article
         imgUrl="/credit.jpeg"
         alt="kredyt"
-        handleActiveArticle={setActiveArticle}
+        handleActiveArticle={handleArticleClick}
         date="Doradztwo kredytowe"
         text="Pomagamy w uzyskaniu kredytu"
       />
@@ -73,7 +82,7 @@ const Blog = () => {
       <Article
         imgUrl="/changing.jpeg"
         alt="zmiany lokatorskie"
-        handleActiveArticle={setActiveArticle}
+        handleActiveArticle={handleArticleClick}
         date="Zmiany lokatorskie"
         text="Dostosuj mieszkanie do siebie"
       />

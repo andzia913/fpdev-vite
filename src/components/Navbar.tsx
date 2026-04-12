@@ -1,77 +1,80 @@
-import React, { useState } from 'react';
-import { FiPhone } from 'react-icons/fi';
-import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
+import React, { useState } from "react";
+import { FiPhone } from "react-icons/fi";
+import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
+import { HashLink } from "react-router-hash-link";
 
 const Navbar = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
-
   const links = [
-    { href: "#about", label: "O inwestycji" },
-    { href: "#features", label: "Zalety" },
-    { href: "#offer", label: "Oferta" },
-    { href: "#location", label: "Kontakt" },
+    { href: "/#about", label: "O inwestycji" },
+    { href: "/#features", label: "Zalety" },
+    { href: "/#offer", label: "Oferta" },
+    { href: "/#location", label: "Kontakt" },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white backdrop-blur shadow-sm`}
-    >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-4">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-100 shadow-sm">
+      
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-6">
 
         {/* LOGO */}
         <a href="/" className="flex items-center">
           <img
             src="/logo.svg"
             alt="FP Development"
-            className="h-10 w-auto"
+            className="h-14 md:h-16 w-auto object-contain"
           />
         </a>
 
         {/* MENU */}
-        <div className="hidden lg:flex items-center gap-10">
+        <div className="hidden lg:flex items-center gap-8">
           {links.map((link) => (
-            <a
+            <HashLink
               key={link.href}
-              href={link.href}
-              className="text-sm tracking-wide text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition duration-200"
+              smooth
+              to={link.href}
+              className="relative text-base font-medium text-gray-600 hover:text-black transition
+              after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 
+              after:bg-[var(--color-primary)] after:transition-all hover:after:w-full"
             >
               {link.label}
-            </a>
+            </HashLink>
           ))}
         </div>
 
-        {/* PRAWA STRONA */}
+        {/* RIGHT */}
         <div className="hidden md:flex items-center gap-6">
 
-          {/* TELEFON */}
+          {/* PHONE */}
           <a
             href="tel:+48530222904"
-            className="text-sm text-[var(--color-text)] hover:text-[var(--color-primary)] transition"
+            className="text-base font-medium text-gray-700 hover:text-[var(--color-primary)] transition"
           >
             530 222 904
           </a>
 
           {/* CTA */}
-          <a
-            href="#offer"
-            className="bg-[var(--color-primary)] text-white text-sm px-5 py-2.5 rounded-md hover:bg-[var(--color-primary-hover)] transition"
+          <HashLink
+            smooth
+            to="/#offer"
+            className="bg-[var(--color-primary)] text-white text-base px-6 py-3 rounded-lg shadow hover:opacity-90 transition"
           >
             Sprawdź ofertę
-          </a>
+          </HashLink>
         </div>
 
         {/* MOBILE BUTTON */}
         <div className="lg:hidden">
           {toggleMenu ? (
             <RiCloseLine
-              size={26}
+              size={30}
               onClick={() => setToggleMenu(false)}
               className="cursor-pointer"
             />
           ) : (
             <RiMenu3Line
-              size={26}
+              size={30}
               onClick={() => setToggleMenu(true)}
               className="cursor-pointer"
             />
@@ -81,34 +84,37 @@ const Navbar = () => {
 
       {/* MOBILE MENU */}
       {toggleMenu && (
-        <div className="lg:hidden bg-white border-t border-[var(--color-border)] px-6 py-8 space-y-6">
+        <div className="lg:hidden bg-white border-t border-gray-100 px-6 py-8 space-y-6">
+
           {links.map((link) => (
-            <a
+            <HashLink
               key={link.href}
-              href={link.href}
+              smooth
+              to={link.href}
               onClick={() => setToggleMenu(false)}
-              className="block text-lg text-[var(--color-text)]"
+              className="block text-lg font-medium text-gray-800"
             >
               {link.label}
-            </a>
+            </HashLink>
           ))}
 
-          <div className="pt-4 border-t border-[var(--color-border)] space-y-4">
+          <div className="pt-6 border-t space-y-4">
 
             <a
               href="tel:+48530222904"
-              className="flex items-center justify-center gap-2 border border-[var(--color-primary)] text-[var(--color-primary)] py-3 rounded-md hover:bg-[var(--color-primary)] hover:text-white transition"
+              className="flex items-center justify-center gap-2 border border-[var(--color-primary)] text-[var(--color-primary)] py-3 rounded-lg hover:bg-[var(--color-primary)] hover:text-white transition"
             >
               <FiPhone className="text-lg" />
               Zadzwoń
             </a>
 
-            <a
-              href="#offer"
-              className="block text-center bg-[var(--color-primary)] text-white py-3 rounded-md"
+            <HashLink
+              smooth
+              to="/#offer"
+              className="block text-center bg-[var(--color-primary)] text-white py-3 rounded-lg"
             >
               Sprawdź ofertę
-            </a>
+            </HashLink>
 
           </div>
         </div>

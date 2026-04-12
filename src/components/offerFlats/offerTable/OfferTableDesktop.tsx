@@ -1,5 +1,5 @@
-import type { Flat } from "../../types/flat";
-import getStatusStyle from "../../helpers/getstatusstyle";
+import type { Flat } from "../../../types/flat";
+import getStatusStyle from "../../../helpers/getstatusstyle";
 import { TiArrowUnsorted ,  TiArrowSortedDown ,  TiArrowSortedUp } from "react-icons/ti";
 
 

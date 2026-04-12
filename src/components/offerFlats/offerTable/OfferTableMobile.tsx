@@ -1,5 +1,5 @@
-import getStatusStyle from "../../helpers/getstatusstyle";
-import type { Flat } from "../../types/flat";
+import getStatusStyle from "../../../helpers/getstatusstyle";
+import type { Flat } from "../../../types/flat";
 
 const OfferTableMobile = ({ data }: { data: Flat[] }) => (
   <div className="flex flex-col gap-4">

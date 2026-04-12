@@ -1,36 +1,19 @@
 import { Routes, Route, Router } from 'react-router-dom';
-import { Admin, Footer, Blog, Offer, Features, Header, About } from './containers';
-import { Location } from './components';
-
-import './App.css';
-import Navbar from './components/Navbar';
+import Admin  from './containers/admin/Admin';
+import Turnkey from './pages/Turnkey';
+import Home from './pages/Home';
+import Layout from './components/Layout';
+import NotFound from './pages/PageNotFound';
 
 const App = () => (
   <>
       <Routes>
-        <Route
-          path="/admin"
-          element={
-            <Admin />
-                          }
-        />
-        <Route
-          path="/"
-          element={(
-            <>
-              <div className="gradient__bg">
-                <Navbar />
-                <Header />
-              </div>
-              <About />
-              <Features />
-              <Offer />
-              <Location />
-              <Blog />
-              <Footer />
-            </>
-          )}
-        />
+        <Route element={  <Layout />  }>
+          <Route path="/" element={  <Home />  }/>
+          <Route path="/wykonczenie-pod-klucz" element={  <Turnkey />  }/>
+        </Route>
+        <Route path="/admin" element={  <Admin />  }/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       
     </>

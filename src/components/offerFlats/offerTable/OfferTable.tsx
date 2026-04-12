@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import useFlatsData from "../../utils/dataService";
-import { Spinner } from "../index";
+import useFlatsData from "../../../utils/dataService";
+import { Spinner } from "../../index";
 import OfferTableDesktop from "./OfferTableDesktop";
 import OfferTableMobile from "./OfferTableMobile";
-import type { Flat } from "../../types/flat";
+import type { Flat } from "../../../types/flat";
 
 const ITEMS_PER_PAGE = 6;
 

@@ -2,9 +2,9 @@
 export { default as Article } from './Article';
 export { default as Location } from './Location';
 export { default as Description } from './Description';
-export { default as OfferTable } from './offerTable/OfferTable';
+export { default as OfferTable } from './offerFlats/offerTable/OfferTable';
 export { default as OfferDetails } from './OfferDetails';
-export { default as OfferPicture } from './offerPicture/OfferPicture';
+export { default as OfferPicture } from './offerFlats/offerPicture/OfferPicture';
 export { default as Feature } from './Feature';
 export { default as ArticleContent } from './ArticleContent';
 export { default as AdminForms } from './adminForms/AdminForms';
