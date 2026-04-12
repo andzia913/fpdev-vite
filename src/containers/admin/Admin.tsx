@@ -1,56 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import './admin.css';
-
+import React, { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-} from 'firebase/auth';
-import { auth } from '../../config/firebase';
-import { AdminForms, AdminLoging } from '../../components';
-import AdminLogging from '../../components/adminLogging/AdminLogging';
+  type User,
+} from "firebase/auth";
+import { auth } from "../../config/firebase";
+
+import AdminLogging from "../../components/adminLogging/AdminLogging";
+import AdminForms from "../../components/adminForms/AdminForms";
 
 const Admin = () => {
-  const [isLogIn, setIsLogIn] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
-  const signIn = async (email: string, password: string ) => {
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, setUser);
+    return () => unsub();
+  }, []);
+
+  const signIn = async (email: string, password: string) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const { user } = userCredential;
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    } catch (e) {
-      console.error(e);
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch {
+      alert("Błędne dane logowania");
     }
   };
 
   const logout = async () => {
-    try {
-      await signOut(auth);
-    } catch (err) {
-      console.error(err);
-    }
+    await signOut(auth);
   };
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setIsLogIn(true);
-      const { uid } = user;
-    } else {
-      setIsLogIn(false);
-    }
-  });
 
   return (
-    <div className="admin-container">
-      <h1 className="admin-container__header">Panel administracyjny</h1>
-      {!isLogIn ? <AdminLogging handleSignIn={signIn} /> : ''}
-      <div>
-        {isLogIn ? <AdminForms handleLogOut={logout} /> : ''}
-      </div>
-    </div>
+    <section className="max-w-4xl mx-auto px-4 py-12">
+
+      <h1 className="text-2xl font-semibold mb-8 text-center">
+        Panel administracyjny
+      </h1>
+
+      {!user ? (
+        <AdminLogging handleSignIn={signIn} />
+      ) : (
+        <AdminForms handleLogOut={logout} />
+      )}
+
+    </section>
   );
 };
+
 export default Admin;

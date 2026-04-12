@@ -18,7 +18,8 @@ const OfferTableMobile = ({ data }: { data: Flat[] }) => (
 
         <img
           src={`/flats/${flat.numberOfFlat}_min.png`}
-          className="w-full h-40 object-cover"
+          alt={`Mieszkanie ${flat.numberOfFlat} - Apartamenty Kaktusowa`}
+          className="h-full object-cover my-2 mx-auto"
         />
 
         <div className="p-4 grid grid-cols-2 gap-y-2 text-sm">

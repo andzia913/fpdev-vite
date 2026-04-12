@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { fetchFlatsData } from './firebaseService';
 
 const useFlatsData = () => {
-  const [flatsData, setFlatsData] = useState([]);
+  const [flatsData, setFlatsData] = useState<any[]>([]);
 
   useEffect(() => {
     fetchFlatsData()

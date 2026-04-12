@@ -1,37 +1,100 @@
-import React from 'react';
-import './footer.css';
+import React from "react";
+import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 
-const Footer = () => (
-  <div className="footer">
-    <div className="footer-container">
-      <div className="footer__fp">
-        <div className="footer__fp-address">
-          <p>FP DEVELOPMENT SP. Z O.O.</p>
-          <p>ul. Nadbrzeżna 10/1 <br />59-220 Legnica</p>
-          <a href="+48000000000">Tel. 000 000 000</a>
-          <p>Mail: mail@mail.pl</p>
+const Footer = () => {
+  return (
+    <footer className="bg-[#0f0f0f] text-gray-400 mt-20">
+
+      {/* TOP */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        {/* DEVELOPER */}
+        <div className="space-y-3 text-sm">
+          <h3 className="text-white font-semibold tracking-wide">
+            FP Development
+          </h3>
+
+          <div className="flex items-start gap-2">
+            <FiMapPin className="mt-1 text-gray-500" />
+            <p>
+              ul. Nadbrzeżna 10/1 <br />
+              59-220 Legnica
+            </p>
+          </div>
+
+          <a
+            href="tel:+48884288898"
+            className="flex items-center gap-2 hover:text-white transition"
+          >
+            <FiPhone /> 884 288 898
+          </a>
+
+          <a
+            href="mailto:mail@mail.pl"
+            className="flex items-center gap-2 hover:text-white transition"
+          >
+            <FiMail /> biuro@fpdevelopment.com.pl
+          </a>
+
+          <div className="text-xs text-gray-600 pt-2 space-y-1">
+            <p>KRS: 0000864251</p>
+            <p>NIP: 6912550934</p>
+            <p>REGON: 38735130800000</p>
+          </div>
         </div>
-        <div className="footer__fp-data">
-          <p>KRS: 0000864251</p>
-          <p>NIP: 6912550934</p>
-          <p>REGON 38735130800000</p>
+
+        {/* SALES */}
+        <div className="space-y-3 text-sm">
+          <h3 className="text-white font-semibold tracking-wide">
+            Biuro sprzedaży
+          </h3>
+
+          <p className="text-gray-400">
+            Centrum Usług Finansowych
+          </p>
+
+          <div className="flex items-start gap-2">
+            <FiMapPin className="mt-1 text-gray-500" />
+            <p>
+              ul. Browarna 22 <br />
+              59-100 Polkowice
+            </p>
+          </div>
+
+          <a
+            href="tel:+48507126941"
+            className="flex items-center gap-2 hover:text-white transition"
+          >
+            <FiPhone /> 507 126 941
+          </a>
+
+          <a
+            href="mailto:cuf.polkowice@poczta.fm"
+            className="flex items-center gap-2 hover:text-white transition"
+          >
+            <FiMail /> cuf.polkowice@poczta.fm
+          </a>
         </div>
       </div>
-      <div className="footer__seller">
-        <p>Biuro sprzedaży</p>
-        <p>Centrum Usług Finansowych Polkowice</p>
-        <p>ul. Browarna 22, 59-100 Polkowice</p>
-        <a href="tel: +48507126941">Tel. 507 126 941</a>
-        <p>e-mail: cuf.polkowice@poczta.fm</p>
-      </div>
-    </div>
 
-    <div className="footer-copyright">
-      <p>Informacje zawarte na tej stronie mają charakter wyłącznie informacyjny. Nie stanowią one oferty handlowej w rozumieniu przepisów prawa. Choć dokładamy wszelkich starań, aby prezentowane treści były aktualne i zgodne z rzeczywistością, nie ponosimy odpowiedzialności za ewentualne błędy czy nieścisłości. Wszystkie decyzje podejmowane na podstawie informacji zawartych na tej stronie są związane z ryzykiem użytkownika. W przypadku jakichkolwiek wątpliwości lub potrzeby uzyskania bardziej szczegółowych informacji, zalecamy skontaktowanie się z nami bezpośrednio. Zastrzegamy sobie prawo do zmiany treści zawartych na stronie bez wcześniejszego powiadomienia. Wszelkie prawa do treści, grafik, czy innych elementów zamieszczonych na stronie są zastrzeżone.
-</p>
-      <p>@2023. Wszytskie prawa zastrzeżone.</p>
-    </div>
-  </div>
-);
+      {/* DIVIDER */}
+      <div className="border-t border-white/10" />
+
+      {/* BOTTOM */}
+      <div className="max-w-6xl mx-auto px-6 lg:px-10 py-6 text-xs text-gray-500 leading-relaxed text-center space-y-3">
+
+        <p>
+          Informacje mają charakter informacyjny i nie stanowią oferty handlowej.
+        </p>
+
+        <p className="text-gray-600">
+          © 2026 FP Development
+        </p>
+
+      </div>
+
+    </footer>
+  );
+};
 
 export default Footer;

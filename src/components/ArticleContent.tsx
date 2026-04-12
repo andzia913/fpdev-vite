@@ -1,14 +1,19 @@
-import React from 'react';
-import './articleContent.css';
+import React from "react";
 
-const ArticleContent = (props) => (
-  <div className="blog-container__article-content" id="articleContent">
-    <h2>{props.activeArticle}</h2>
-    <div
-      style={{ display: `${props.activeArticle === 'Bezpieczny kredyt 2%' ? 'block' : 'none'}` }}
-      className="article__safe-credit"
-    >
-      <p>Czy słyszałeś o rewolucyjnym kredycie, który pozwala ci sięgnąć po marzenia o własnym mieszkaniu? Teraz
+type Props = {
+  activeArticle: string | null;
+  onClose: () => void;
+};
+
+const ArticleContent = ({ activeArticle, onClose }: Props) => {
+  if (!activeArticle) return null;
+
+  const renderContent = () => {
+    switch (activeArticle) {
+      case "Bezpieczny kredyt 2%":
+        return (
+          <>
+            <p>Czy słyszałeś o rewolucyjnym kredycie, który pozwala ci sięgnąć po marzenia o własnym mieszkaniu? Teraz
         jest to możliwe! Ten niesamowity kredyt oferuje maksymalną kwotę aż 500 tys. zł dla jednej osoby i aż 600
         tys. zł dla małżeństwa lub rodziców z dzieckiem! To szansa, której nie możesz przegapić.
       </p>
@@ -62,13 +67,37 @@ const ArticleContent = (props) => (
           className="fa-solid fa-envelope"
         /> cuf.polkowice@poczta.fm
         </a>
-      </div>
-    </div>
-    <div
-      style={{ display: `${props.activeArticle === 'Zmiany lokatorskie' ? 'block' : 'none'}` }}
-      className="article__changing"
-    >
-      <p>Zmiany lokatorskie to modyfikacje w oryginalnym planie mieszkania, które nabywca może wprowadzić na etapie
+            <p>
+              Maksymalna kwota to aż <strong>500 tys. zł</strong> dla jednej osoby i{" "}
+              <strong>600 tys. zł</strong> dla rodzin.
+            </p>
+
+            <p>
+              Dzięki dopłatom rządowym przez 10 lat płacisz realnie około <strong>2%</strong>.
+            </p>
+
+            <div className="bg-[var(--color-primary)]/10 p-4 rounded-lg">
+              <p className="font-medium">
+                Oferujemy pomoc w uzyskaniu kredytu – od analizy po decyzję.
+              </p>
+
+              <div className="flex flex-wrap gap-3 mt-3">
+                <a
+                  href="tel:+48507126941"
+                  className="px-4 py-2 bg-[var(--color-primary)] text-white rounded"
+                >
+                  📞 507 126 941
+                </a>
+              </div>
+            </div>
+            </div>
+          </>
+        );
+
+      case "Zmiany lokatorskie":
+        return (
+          <>
+            <p>Zmiany lokatorskie to modyfikacje w oryginalnym planie mieszkania, które nabywca może wprowadzić na etapie
         budowy stanu deweloperskiego. Oferując tę opcję, dajemy klientom szansę dostosowania swojego przyszłego
         mieszkania w Polkowicach do własnych potrzeb i preferencji.
       </p>
@@ -104,18 +133,29 @@ const ArticleContent = (props) => (
       <p>Apartamenty przy ul. Kaktusowej w Polkowicach zostały zaprojektowane z myślą o maksymalnej funkcjonalności i komforcie,
         jednak wiemy, że każdy ma indywidualne potrzeby, dlatego pozostajemy otwarci na wprowadzenie zmian.
       </p>
-    </div>
-    <div
-      style={{ display: `${props.activeArticle === 'Dziennik budowy' ? 'block' : 'none'}` }}
-      className="progress"
-    >
-      <p>Już niedługo będziesz mógł tutaj sprawdzić aktualne postępy na budowie</p>
-    </div>
-    <div
-      style={{ display: `${props.activeArticle === 'Doradztwo kredytowe' ? 'block' : 'none'}` }}
-      className="credit"
-    >
-      W ramach inwestycji <span>Apartamenty Kaktusowa</span> podjeliśmy współpracę z renomowanym pośrednictwem kredytowym
+          
+            <ul className="list-disc pl-5 space-y-2">
+              <li>zmiana układu ścian</li>
+              <li>modyfikacja instalacji</li>
+              <li>dostosowanie łazienki/kuchni</li>
+            </ul>
+
+            <p>
+              Wszystko odbywa się bez naruszania konstrukcji budynku.
+            </p>
+          </>
+        );
+
+      case "Dziennik budowy":
+        return <p>Już niedługo pojawią się tutaj aktualizacje z budowy 👷‍♂️</p>;
+
+      case "Doradztwo kredytowe":
+        return (
+          <>
+            <p>
+              Współpracujemy z ekspertami kredytowymi, którzy pomagają znaleźć najlepszą ofertę.
+            </p>
+W ramach inwestycji <span>Apartamenty Kaktusowa</span> podjeliśmy współpracę z renomowanym pośrednictwem kredytowym
       <a href="https://www.cuf.polkowice.pl/material,hipoteczne,269.html">Centrum usług finansowych w Polkowicach</a>
       , który pomaga naszym klientom zrealizować ich marzenia o własnym mieszkaniu.
       <p>Nasz zaufany partner to ekspert w dziedzinie kredytów hipotecznych. Dzięki ich wsparciu, nasi klienci otrzymują kompleksową pomoc w procesie aplikacji kredytowej, z uwzględnieniem indywidualnych potrzeb każdej osoby.</p>
@@ -128,9 +168,55 @@ const ArticleContent = (props) => (
         <li>Oferty kredytowe ponad 10 banków, aby dobrać tą nalepszą dla Ciebie</li>
       </ul>
       <p>Jeśli szukasz pewnego partnera w zakresie kredytów hipotecznych, który wesprze Cię na każdym kroku tego skomplikowanego procesu, zapewniamy, że nasz eksperci z Centrum Usług Finanowych są najlepszym wyborem! Skontaktuj się z nimi już dziś i przekonaj się, jak mogą pomóc Ci w realizacji Twoich planów mieszkaniowych. Razem z nimi, Twoje wymarzone mieszkanie staje się bliżej, niż myślisz!</p>
-    </div>
 
-  </div>
-);
+            <ul className="list-disc pl-5 space-y-2">
+              <li>prowizja od 0%</li>
+              <li>oferty wielu banków</li>
+              <li>szybkie decyzje</li>
+            </ul>
+          </>
+        );
+
+      default:
+        return <p>Brak treści</p>;
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+      {/* BACKDROP */}
+      <div
+        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        onClick={onClose}
+      />
+
+      {/* MODAL */}
+      <div className="relative bg-white max-w-3xl w-full mx-4 rounded-2xl shadow-xl overflow-hidden animate-fadeIn">
+
+        {/* CLOSE */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-lg text-gray-500 hover:text-black"
+        >
+          ✕
+        </button>
+
+        {/* CONTENT */}
+        <div className="p-6 md:p-10 space-y-6">
+
+          <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-primary)]">
+            {activeArticle}
+          </h2>
+
+          <div className="space-y-4 text-gray-600 leading-relaxed">
+            {renderContent()}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default ArticleContent;

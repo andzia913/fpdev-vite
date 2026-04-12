@@ -1,37 +1,109 @@
-import React from 'react';
-import './adminConfirmation.css';
+import React from "react";
 
-const AdminConfirmation = ({ number, currPriceOfMeter, newPriceOfMeter, currPriceOfFlat, newPriceOfFlat, currStatute, newStatute, onClose, onConfirm }) => (
-  <div className="admin-form__popup">
-    <h3>Czy napewno chcesz wprowadzić poniższe zmiany?</h3>
-    <p>Mieszkanie {number}</p>
-    <table>
-      <thead>
-        <th>Parametr</th>
-        <th>Przed zmianą</th>
-        <th>Po zmianie</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Cena za metr</td>
-          <td>{currPriceOfMeter}</td>
-          <td>{!newPriceOfMeter ? currPriceOfMeter : newPriceOfMeter}</td>
-        </tr>
-        <tr>
-          <td>Cena mieszkania</td>
-          <td>{currPriceOfFlat}</td>
-          <td>{!newPriceOfFlat ? currPriceOfFlat : newPriceOfFlat}</td>
-        </tr>
-        <tr>
-          <td>Status</td>
-          <td>{currStatute}</td>
-          <td>{!newStatute ? currStatute : newStatute}</td>
-        </tr>
-      </tbody>
-    </table>
-    <button type="button" onClick={() => onConfirm()}>Zatwierdź zmiany</button>
-    <button type="button" onClick={() => onClose()}>Anuluj wprowadzenie zmian</button>
+type Props = {
+  number: string;
+  currPriceOfMeter: string;
+  newPriceOfMeter?: string;
+  currPriceOfFlat: string;
+  newPriceOfFlat?: string;
+  currStatute: string;
+  newStatute?: string;
+  onClose: () => void;
+  onConfirm: () => void;
+};
+
+const Row = ({
+  label,
+  before,
+  after,
+}: {
+  label: string;
+  before: string;
+  after: string;
+}) => (
+  <div className="flex justify-between items-center py-3 border-b last:border-none">
+    <span className="text-sm text-gray-500">{label}</span>
+
+    <div className="flex items-center gap-4 text-sm">
+      <span className="text-gray-400 line-through">{before}</span>
+      <span className="font-semibold text-[var(--color-primary)]">
+        {after}
+      </span>
+    </div>
   </div>
 );
+
+const AdminConfirmation = ({
+  number,
+  currPriceOfMeter,
+  newPriceOfMeter,
+  currPriceOfFlat,
+  newPriceOfFlat,
+  currStatute,
+  newStatute,
+  onClose,
+  onConfirm,
+}: Props) => {
+  return (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
+
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-6 space-y-5">
+
+        {/* HEADER */}
+        <div>
+          <h3 className="text-lg font-semibold">
+            Potwierdź zmiany
+          </h3>
+          <p className="text-sm text-gray-500">
+            Mieszkanie {number}
+          </p>
+        </div>
+
+        {/* CHANGES */}
+        <div className="divide-y">
+
+          <Row
+            label="Cena za m²"
+            before={currPriceOfMeter}
+            after={newPriceOfMeter || currPriceOfMeter}
+          />
+
+          <Row
+            label="Cena mieszkania"
+            before={currPriceOfFlat}
+            after={newPriceOfFlat || currPriceOfFlat}
+          />
+
+          <Row
+            label="Status"
+            before={currStatute}
+            after={newStatute || currStatute}
+          />
+
+        </div>
+
+        {/* ACTIONS */}
+        <div className="flex justify-end gap-3 pt-4">
+
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg border text-gray-600 hover:bg-gray-100 transition"
+          >
+            Anuluj
+          </button>
+
+          <button
+            onClick={onConfirm}
+            className="px-4 py-2 rounded-lg bg-[var(--color-primary)] text-white hover:opacity-90 transition"
+          >
+            Zatwierdź
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  );
+};
 
 export default AdminConfirmation;
