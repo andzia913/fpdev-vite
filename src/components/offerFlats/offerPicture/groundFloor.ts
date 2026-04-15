@@ -3,6 +3,8 @@ import  generateAreaProperties from '../../../utils/statusOfFlat';
 const groundFloor = {
   name: 'groundFloor',
   key: 'groundFloor',
+  width: 1587,
+  height: 763,
   src: 'flats/parter_Kaktusowa.png',
   areas: [
     {
@@ -11,7 +13,6 @@ const groundFloor = {
       shape: 'rect',
       name: '1',
       stayHighlighted: true,
-      onMouseEnter: console.log('działa 1'),
       href: 'flats/01A_Kaktusowa.pdf',
       ...await generateAreaProperties('M1A'),
       strokeColor: 'rgba(0, 0, 0, 0)',

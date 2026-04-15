@@ -4,6 +4,8 @@ import generateAreaProperties from '../../../utils/statusOfFlat';
 const firstFloor = {
   name: 'firstFloor',
   key: 'firstFloor',
+  width: 1568,
+  height: 757,
   src: 'flats/pierwsze-piętro_Kaktusowa.png',
   areas: [
     {

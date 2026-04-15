@@ -11,6 +11,8 @@ const secondFloor = {
       shape: 'rect',
       name: '23',
       href: 'flats/23A_Kaktusowa.pdf',
+      width: 1578,
+      height: 749,
       ...await generateAreaProperties('M23A'),
       strokeColor: 'rgba(0, 0, 0, 0)',
       coords: [688, 375, 900, 40],

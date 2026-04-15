@@ -1,0 +1,634 @@
+{
+  "garages": {
+    "MP01": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP02": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP03": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP04": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP05": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP06": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP07": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP08": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP09": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP10": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP11": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP12": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP13": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP14": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP15": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP16": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP17": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP18": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP19": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP20": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP21": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP22": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP23": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP24": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP25": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP26": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP27": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP28": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP29": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP30": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP31": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP32": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MP33": {
+      "type": "podziemne",
+      "status": "dostepne",
+      "price": 50000,
+      "disabled": false
+    },
+    "MZ01": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": true
+    },
+    "MZ02": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": true
+    },
+    "MZ03": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": true
+    },
+    "MZ04": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": true
+    },
+    "MZ05": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": true
+    },
+    "MZ06": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ07": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ08": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ09": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ10": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ11": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ12": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ13": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ14": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ15": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ16": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ17": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ18": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ19": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ20": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ21": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ22": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ23": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ24": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ25": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ26": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ27": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ28": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ29": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ30": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ31": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ32": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ33": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ34": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ35": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ36": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ37": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ38": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ39": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ40": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ41": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ42": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ43": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ44": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ45": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ46": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ47": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ48": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ49": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ50": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ51": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ52": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ53": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ54": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ55": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ56": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ57": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ58": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ59": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ60": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ61": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ62": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ63": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ64": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ65": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ66": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ67": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ68": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ69": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ70": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ71": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    },
+    "MZ72": {
+      "type": "zewnetrzne",
+      "status": "dostepne",
+      "price": 0,
+      "disabled": false
+    }
+  }
+}

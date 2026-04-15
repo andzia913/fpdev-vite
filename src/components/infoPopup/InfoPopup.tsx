@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './infoPopup.css';
 
 const InfoPopup = ({ onClose, text, isPositive }) => {
-  console.log('');
   useEffect(() => {
     const timeout = setTimeout(() => {
       onClose();

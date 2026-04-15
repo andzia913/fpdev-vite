@@ -7,6 +7,8 @@ const buildingMap = {
   name: 'buildingMap',
   key: 'buildingMap',
   src: 'visualization.jpg',
+  width:1400,
+  height: 742,
   areas: [
     {
       id: "groundFloor",

@@ -1,8 +1,7 @@
 import type { Flat } from "../../../types/flat";
-import getStatusStyle from "../../../helpers/getstatusstyle";
 import { TiArrowUnsorted ,  TiArrowSortedDown ,  TiArrowSortedUp } from "react-icons/ti";
-
-
+import { STATUS_CONFIG } from "../../../utils/statusOfFlat";
+import { normalizeStatus } from "../../../utils/statusOfFlat";
 
 type Sort = {
   key: keyof Flat;
@@ -118,7 +117,10 @@ const OfferTableDesktop = ({
         </thead>
 
         <tbody>
-          {data.map((flat, i) => (
+          {data.map((flat, i) => {
+            const normalized = normalizeStatus(flat.statute);
+            const config = STATUS_CONFIG[normalized] || STATUS_CONFIG.available;
+          return (
             <tr key={i} className="bg-white shadow-sm hover:shadow-md">
 
               <td className="px-4 py-4 font-semibold text-center ">
@@ -130,15 +132,13 @@ const OfferTableDesktop = ({
               <td className="px-4 py-4 text-center">{flat.surface} m²</td>
               <td className="px-4 py-4 text-center">{flat.priceOfFlat} zł</td>
 
-              <td>
-                <span
-                  className={`px-2 py-1 rounded text-xs ${getStatusStyle(flat.statute)}`}
-                >
-                  {flat.statute}
-                </span>
+              <td className="text-center">
+              <span className={`px-2 py-1 rounded text-xs  ${config.badge}`}>
+                {config.label}
+              </span>
               </td>
 
-              <td>
+              <td className="text-center">
                 <a
                   href={flat.cardOfFlat}
                   target="_blank"
@@ -150,7 +150,7 @@ const OfferTableDesktop = ({
               </td>
 
             </tr>
-          ))}
+          )})}
         </tbody>
       </table>
 

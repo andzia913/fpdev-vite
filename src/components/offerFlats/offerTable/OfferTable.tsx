@@ -4,7 +4,6 @@ import { Spinner } from "../../index";
 import OfferTableDesktop from "./OfferTableDesktop";
 import OfferTableMobile from "./OfferTableMobile";
 import type { Flat } from "../../../types/flat";
-
 const ITEMS_PER_PAGE = 6;
 
 
@@ -22,7 +21,6 @@ const parseFlatNumber = (val: string) => {
 
 const OfferTable = ({ changeOnOfferDetails }: any) => {
   const { flatsData } = useFlatsData() as { flatsData: Flat[] };
-
   const [filtered, setFiltered] = useState<Flat[]>([]);
   const [page, setPage] = useState(0);
 
@@ -108,7 +106,6 @@ const OfferTable = ({ changeOnOfferDetails }: any) => {
 
     setFiltered(data);
     setPage(0);
-     console.log(flatsData)
 
   }, [filters, sort, flatsData]);
 
@@ -214,7 +211,12 @@ const OfferTable = ({ changeOnOfferDetails }: any) => {
           </div>
 
           <div className="md:hidden">
-            <OfferTableMobile data={paginated} />
+            <OfferTableMobile 
+              data={paginated}
+              page={page}
+              setPage={setPage}
+              totalPages={totalPages}
+               />
           </div>
         </>
       )}
