@@ -21,6 +21,8 @@ type Sort = {
 
 const Garage = () => {
   const [selectedGarageId, setSelectedGarageId] = useState<string | null>(null);
+  const [selectionSource, setSelectionSource] = useState<"map" | "table" | null>(null);
+
   const [garages, setGarages] = useState<Garage[]>([]);
   const [filter, setFilter] = useState<"podziemne" | "zewnetrzne">("podziemne");
 
@@ -63,9 +65,10 @@ const Garage = () => {
       : String(valB).localeCompare(String(valA));
   });
 
-  // 🔥 AUTO PAGE SWITCH
+  // 🔥 AUTO PAGE SWITCH — tylko z mapy
   useEffect(() => {
     if (!selectedGarageId) return;
+    if (selectionSource !== "map") return;
 
     const index = sorted.findIndex((g) => g.id === selectedGarageId);
     if (index === -1) return;
@@ -75,18 +78,78 @@ const Garage = () => {
     if (newPage !== page) {
       setPage(newPage);
     }
-  }, [selectedGarageId, sorted, page]);
+  }, [selectedGarageId, sorted, selectionSource]);
 
-  // 🔥 SCROLL (po zmianie strony)
+  // 🔥 AUTO PAGE SWITCH + SCROLL (JEDNO MIEJSCE)
+useEffect(() => {
+  if (!selectedGarageId) return;
+
+  const index = sorted.findIndex((g) => g.id === selectedGarageId);
+  if (index === -1) return;
+
+  const newPage = Math.floor(index / perPage);
+
+  const isMobile = window.innerWidth < 1024;
+
+  // 🔥 zmiana strony tylko z mapy
+  if (selectionSource === "map" && newPage !== page) {
+    setPage(newPage);
+
+    // 🔥 scroll tylko mobile
+    if (isMobile) {
+      setTimeout(() => {
+        const row = document.querySelector(
+          `[data-id="${selectedGarageId}"]`
+        ) as HTMLElement | null;
+
+        if (!row) return;
+
+        const rect = row.getBoundingClientRect();
+        const isVisible =
+          rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+        if (!isVisible) {
+          row.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+          });
+        }
+      }, 100);
+    }
+  }
+
+  // 🔥 klik w tabeli → tylko ewentualny scroll (bez zmiany page)
+  if (selectionSource === "table") {
+    const row = document.querySelector(
+      `[data-id="${selectedGarageId}"]`
+    ) as HTMLElement | null;
+
+    if (!row) return;
+
+    const isMobile = window.innerWidth < 1024;
+
+    if (!isMobile) return;
+
+    const rect = row.getBoundingClientRect();
+    const isVisible =
+      rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+    if (!isVisible) {
+      row.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }
+}, [selectedGarageId, selectionSource, sorted]);
+
+  // 🔥 reset source (żeby nie blokowało paginacji)
   useEffect(() => {
-    if (!selectedGarageId) return;
+    if (!selectionSource) return;
 
-    const el = document.getElementById("garaze");
-
-    setTimeout(() => {
-      el?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  }, [page]);
+    const t = setTimeout(() => setSelectionSource(null), 200);
+    return () => clearTimeout(t);
+  }, [selectionSource]);
 
   // 🔥 PAGINATION
   const totalPages = Math.ceil(sorted.length / perPage);
@@ -168,10 +231,13 @@ const Garage = () => {
         {/* MAPA */}
         <div>
           <GarageMap
-            garages={filtered} // 🔥 WAŻNE
+            garages={filtered}
             type={filter}
             selectedId={selectedGarageId}
-            onSelect={setSelectedGarageId}
+            onSelect={(id) => {
+              setSelectionSource("map");
+              setSelectedGarageId(id);
+            }}
           />
         </div>
 
@@ -182,7 +248,10 @@ const Garage = () => {
             toggleSort={toggleSort}
             sort={sort}
             selectedId={selectedGarageId}
-            onSelect={setSelectedGarageId}
+            onSelect={(id) => {
+              setSelectionSource("table");
+              setSelectedGarageId(id);
+            }}
           />
 
           {/* PAGINACJA */}

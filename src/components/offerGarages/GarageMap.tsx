@@ -31,17 +31,25 @@ const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
     garages.map((g) => [g.id, g])
   );
 
-  const handleClick = (id: string) => {
+ const handleClick = (id: string) => {
     onSelect?.(id);
 
-    // 🔥 scroll do tabeli
-    document
-      .getElementById("garaze")
-      ?.scrollIntoView({ behavior: "smooth" });
+    const table = document.getElementById("garageTable");
+    if (!table) return;
+
+    const rect = table.getBoundingClientRect();
+    const isVisible =
+      rect.top >= 0 && rect.bottom <= window.innerHeight;
+    if (!isVisible) {
+      table.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   return (
-    <div className="relative w-full max-w-[800px] mx-auto">
+    <div className="relative w-full max-w-[800px] mx-auto" id="garageMap">
 
       <img src={image} className="w-full" />
 
@@ -76,7 +84,7 @@ const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
                 fill: config?.mapColor || "rgba(255,255,255,0.2)",
                 opacity: hovered?.id === area.id ? 0.7 : 1,
                 stroke: isSelected ? "#000" : "none",
-                strokeWidth: isSelected ? 2 : 0,
+                strokeWidth: isSelected ? 4 : 0,
               }}
             />
           );
