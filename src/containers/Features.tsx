@@ -1,27 +1,26 @@
-import React from "react";
 import Feature from "../components/Feature";
 
 const featuresData = [
   {
-    img: "balcony.jpeg",
+    img: "balcony.webp",
     title: "Ogródki i balkony",
     text: "Każde mieszkanie posiada balkon lub ogródek, który zapewnia przestrzeń do relaksu.",
     alt: "Balkon z roślinami",
   },
   {
-    img: "elevator.jpeg",
+    img: "elevator.webp",
     title: "Windy",
     text: "Nowoczesne windy zapewniają wygodny dostęp do wszystkich kondygnacji.",
     alt: "Winda w budynku",
   },
   {
-    img: "heater.jpeg",
+    img: "heater.webp",
     title: "Ogrzewanie",
     text: "Pompy ciepła i nowoczesne rozwiązania zapewniają komfort i oszczędność.",
     alt: "Grzejnik w mieszkaniu",
   },
   {
-    img: "buildings.jpeg",
+    img: "buildings.webp",
     title: "Ergonomiczne budownictwo",
     text: "Funkcjonalne układy mieszkań i przemyślana przestrzeń.",
     alt: "Nowoczesne budynki mieszkalne Polkowice",

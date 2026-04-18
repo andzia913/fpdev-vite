@@ -1,22 +1,22 @@
 import { TiArrowUnsorted, TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 import { STATUS_CONFIG } from "../../../utils/statusOfFlat";
-import type { Garage } from "../../../types/garages";
+import type { garageType } from "../../../types/garages";
 import { normalizeStatus } from "../../../utils/statusOfFlat";
 
 type Sort = {
-  key: keyof Garage;
+  key: keyof garageType;
   direction: "asc" | "desc";
 };
 
 type Props = {
-  data: Garage[];
-  toggleSort: (key: keyof Garage) => void;
+  data: garageType[];
+  toggleSort: (key: keyof garageType) => void;
   sort: Sort;
   selectedId?: string | null;
   onSelect?: (id: string) => void;
 };
 
-const getSortIcon = (key: keyof Garage, sort: Sort) => {
+const getSortIcon = (key: keyof garageType, sort: Sort) => {
   if (sort.key !== key) return <TiArrowUnsorted />;
   return sort.direction === "asc" ? <TiArrowSortedUp /> : <TiArrowSortedDown />;
 };

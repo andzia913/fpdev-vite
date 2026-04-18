@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import  { useState, lazy, Suspense } from "react";
 import Spinner from "../components/spinner/Spinner";
 import Article from "../components/Article";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +36,7 @@ const Blog = () => {
 
   <div className="md:col-span-3 md:row-span-2 md:max-h-[588.02px] aspect-square md:aspect-auto">
     <Article
-      imgUrl="/safe-credit.jpeg"
+      imgUrl="/safe-credit.webp"
       alt="bezpieczny kredyt"
       handleActiveArticle={setActiveArticle}
       date="Bezpieczny kredyt 2%"
@@ -50,7 +50,7 @@ const Blog = () => {
 
     <div className="aspect-square">
       <Article
-        imgUrl="/progress.jpeg"
+        imgUrl="/progress.webp"
         alt="postępy budowy"
         handleActiveArticle={handleArticleClick}
         date="Dziennik budowy"
@@ -60,7 +60,7 @@ const Blog = () => {
 
     <div className="aspect-square">
       <Article
-        imgUrl="/designer.jpeg"
+        imgUrl="/designer.webp"
         alt="wykończenie"
         handleActiveArticle={handleArticleClick}
         date="Wykończenie pod klucz"
@@ -70,7 +70,7 @@ const Blog = () => {
 
     <div className="aspect-square">
       <Article
-        imgUrl="/credit.jpeg"
+        imgUrl="/credit.webp"
         alt="kredyt"
         handleActiveArticle={handleArticleClick}
         date="Doradztwo kredytowe"
@@ -80,7 +80,7 @@ const Blog = () => {
 
     <div className="aspect-square">
       <Article
-        imgUrl="/changing.jpeg"
+        imgUrl="/changing.webp"
         alt="zmiany lokatorskie"
         handleActiveArticle={handleArticleClick}
         date="Zmiany lokatorskie"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useFlatsData from "../../../utils/dataService";
 import { Spinner } from "../../index";
 import OfferTableDesktop from "./OfferTableDesktop";
@@ -149,18 +149,24 @@ useEffect(() => {
 
       {/* FILTERS */}
       <div className="bg-white p-6 rounded-lg shadow-sm mb-8 flex flex-wrap gap-4 items-end">
+         <div className="flex flex-col">
+        <label htmlFor="statusFilter" className="sr-only">
+          Filtruj po statusie
+        </label>
         <select
+          id="statusFilter"
           value={filters.status}
           onChange={(e) =>
             setFilters({ ...filters, status: e.target.value })
           }
           className="border rounded px-3 py-2"
         >
-          <option value="">Wszystkie</option>
+          <option value="">Status: wszystkie</option>
           <option value="dostępne">Dostępne</option>
           <option value="rezerwacja">Rezerwacja</option>
           <option value="sprzedane">Sprzedane</option>
         </select>
+    </div>
 
         <input
           type="number"

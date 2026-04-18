@@ -1,5 +1,3 @@
-import React from "react";
-
 const Spinner = ({ fullScreen = true }: { fullScreen?: boolean }) => {
   return (
     <div

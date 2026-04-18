@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 
 const Feature = ({ title, text, img, alt, index }: { title: string; text: string; img: string; alt: string; index: number }) => {
   const isEven = index % 2 === 0;

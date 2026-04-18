@@ -11,5 +11,4 @@ export { default as AdminForms } from './admin/AdminForms';
 export { default as AdminLoging } from './admin/AdminLogging';
 export { default as Spinner } from './spinner/Spinner';
 export { default as AdminConfirmation } from './admin/AdminConfirmation';
-export { default as InfoPopup } from './infoPopup/InfoPopup';
 

@@ -11,12 +11,14 @@ type Props = {
 
 const CONFIG = {
   zewnetrzne: {
-    image: "/parking_zewnetrzny.jpg",
+    image: "/parking_zewnetrzny.webp",
+    alt: "Parking zewnętrzny",
     coords: cords.outdoorCoords,
     viewBox: "0 0 708 1054",
   },
   podziemne: {
-    image: "/parking_wewnetrzny.jpg",
+    image: "/parking_wewnetrzny.webp",
+    alt: "Parking podziemny",
     coords: cords.undergroundCoords,
     viewBox: "0 0 820 1141",
   },
@@ -25,7 +27,7 @@ const CONFIG = {
 const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
   const [hovered, setHovered] = useState<any>(null);
 
-  const { image, coords, viewBox } = CONFIG[type];
+  const { image, coords, viewBox, alt } = CONFIG[type];
 
   const garageMap = Object.fromEntries(
     garages.map((g) => [g.id, g])
@@ -51,7 +53,7 @@ const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
   return (
     <div className="relative w-full max-w-[800px] mx-auto" id="garageMap">
 
-      <img src={image} className="w-full" />
+      <img src={image} className="w-full" alt={alt} />
 
       <svg
         className="absolute top-0 left-0 w-full h-full"

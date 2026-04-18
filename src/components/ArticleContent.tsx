@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../config/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -26,11 +26,27 @@ const ArticleContent = ({ activeArticle, onClose }: Props) => {
 
     loadDiary();
   }, []);
+
+  // 🔒 blokada scrolla tła
+  useEffect(() => {
+    if (activeArticle) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [activeArticle]);
+
   if (!activeArticle) return null;
+
   const formatDate = (date: string) => {
     if (!date) return "";
     return new Date(date).toLocaleDateString("pl-PL");
   };
+
   const renderContent = () => {
     switch (activeArticle) {
       case "Bezpieczny kredyt 2%":
@@ -169,44 +185,37 @@ const ArticleContent = ({ activeArticle, onClose }: Props) => {
           </>
         );
 
-        case "Dziennik budowy":
-          return (
-            <div className="space-y-4 max-h-[400px] overflow-auto">
+      case "Dziennik budowy":
+        return (
+          <div className="space-y-4">
 
-              {diaryData.length === 0 && (
-                <p className="text-gray-400">
-                  Brak wpisów
-                </p>
-              )}
+            {diaryData.length === 0 && (
+              <p className="text-gray-400">Brak wpisów</p>
+            )}
 
-              {diaryData
-                .sort((a, b) => b.date.localeCompare(a.date)) // najnowsze na górze
-                .map((entry) => (
-                  <div
-                    key={entry.id}
-                    className="border-b pb-3 last:border-none"
-                  >
+            {diaryData
+              .sort((a, b) => b.date.localeCompare(a.date))
+              .map((entry) => (
+                <div key={entry.id} className="border-b pb-3 last:border-none">
 
-                    {/* DATA */}
-                    <div className="text-xs text-gray-400 mb-1">
-                      {formatDate(entry.date)}
-                    </div>
-
-                    {/* OPIS */}
-                    <div className="text-sm text-gray-700">
-                      {entry.title}
-                    </div>
-
+                  <div className="text-xs text-gray-400 mb-1">
+                    {formatDate(entry.date)}
                   </div>
-                ))}
 
-            </div>
-          );
+                  <div className="text-sm text-gray-700">
+                    {entry.title}
+                  </div>
+
+                </div>
+              ))}
+
+          </div>
+        );
 
       case "Doradztwo kredytowe":
         return (
           <>
-            <p>
+           <p>
               Współpracujemy z ekspertami kredytowymi, którzy pomagają znaleźć najlepszą ofertę.
             </p>
 W ramach inwestycji <span>Apartamenty Kaktusowa</span> podjeliśmy współpracę z renomowanym pośrednictwem kredytowym
@@ -237,29 +246,38 @@ W ramach inwestycji <span>Apartamenty Kaktusowa</span> podjeliśmy współpracę
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center">
 
       {/* BACKDROP */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/60"
         onClick={onClose}
       />
 
       {/* MODAL */}
-      <div className="relative bg-white max-w-3xl w-full mx-4 rounded-2xl shadow-xl overflow-hidden animate-fadeIn">
+      <div
+        className="
+          relative bg-white w-full md:max-w-3xl
+          rounded-t-2xl md:rounded-2xl
+          shadow-xl
+          max-h-[90vh] overflow-y-auto
+        "
+      >
 
-        {/* CLOSE */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-lg text-gray-500 hover:text-black"
-        >
-          ✕
-        </button>
+        {/* HEADER (sticky = zawsze widoczny close) */}
+        <div className="sticky top-0 bg-white z-20 flex justify-end p-4 border-b">
+          <button
+            onClick={onClose}
+            className="bg-black/80 text-white rounded-full w-10 h-10 flex items-center justify-center"
+          >
+            ✕
+          </button>
+        </div>
 
         {/* CONTENT */}
-        <div className="p-6 md:p-10 space-y-6">
+        <div className="p-4 md:p-10 space-y-6">
 
-          <h2 className="text-2xl md:text-3xl font-semibold text-[var(--color-primary)]">
+          <h2 className="text-xl md:text-3xl font-semibold text-[var(--color-primary)]">
             {activeArticle}
           </h2>
 

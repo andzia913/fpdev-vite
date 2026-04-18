@@ -6,7 +6,7 @@ import thirdFloor from './thirdFloor';
 const buildingMap = {
   name: 'buildingMap',
   key: 'buildingMap',
-  src: 'visualization.jpg',
+  src: 'visualization.webp',
   width:1400,
   height: 742,
   areas: [

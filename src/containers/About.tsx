@@ -1,4 +1,3 @@
-import React from "react";
 import Description from "../components/Description";
 const About = () => {
   return (
@@ -43,21 +42,21 @@ const About = () => {
 
             <Description
               title="Dostęp i parking"
-              img="car.jpg"
+              img="car.webp"
               alt="Samochód na drodze"
               text="Wygodne drogi dojazdowe oraz parking zewnętrzny i podziemny zapewniają komfort i bezpieczeństwo."
             />
 
             <Description
               title="Różnorodność"
-              img="window.jpg"
+              img="window.webp"
               alt="Okno"
               text="Przestronne mieszkania z dużą ilością światła i wysoką jakością wykonania."
             />
 
             <Description
               title="Natura"
-              img="jogging.jpg"
+              img="jogging.webp"
               alt="Jogging"
               text="Bliskość terenów zielonych sprzyja aktywnemu i spokojnemu stylowi życia."
             />

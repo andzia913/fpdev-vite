@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchDiaryData } from "./firebaseService";
 
 const useDiaryData = () => {
-    const [diaryData, setDiaryData] = useState([]);
+    const [diaryData, setDiaryData] = useState<any>([]);
     useEffect(() => {
       fetchDiaryData()
         .then((data) => {

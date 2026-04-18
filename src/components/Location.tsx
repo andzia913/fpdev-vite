@@ -1,4 +1,3 @@
-import React from "react";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 
 const Location = () => {

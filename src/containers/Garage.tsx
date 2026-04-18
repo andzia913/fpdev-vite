@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import GarageTable from "../components/offerGarages/offerTable/GarageTable";
-import type { Garage } from "../types/garages";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import GarageMap from "../components/offerGarages/GarageMap";
+import type { garageType } from "../types/garages";
 
 export const fetchGarages = async () => {
   const snapshot = await getDocs(collection(db, "garages"));
@@ -15,7 +15,7 @@ export const fetchGarages = async () => {
 };
 
 type Sort = {
-  key: keyof Garage;
+  key: keyof garageType;
   direction: "asc" | "desc";
 };
 
@@ -23,7 +23,7 @@ const Garage = () => {
   const [selectedGarageId, setSelectedGarageId] = useState<string | null>(null);
   const [selectionSource, setSelectionSource] = useState<"map" | "table" | null>(null);
 
-  const [garages, setGarages] = useState<Garage[]>([]);
+  const [garages, setGarages] = useState<garageType[]>([]);
   const [filter, setFilter] = useState<"podziemne" | "zewnetrzne">("podziemne");
 
   const [sort, setSort] = useState<Sort>({
@@ -38,7 +38,7 @@ const Garage = () => {
   useEffect(() => {
     const load = async () => {
       const data = await fetchGarages();
-      setGarages(data as Garage[]);
+      setGarages(data as garageType[]);
     };
     load();
   }, []);
@@ -97,7 +97,7 @@ useEffect(() => {
 
     // 🔥 scroll tylko mobile
     if (isMobile) {
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         const row = document.querySelector(
           `[data-id="${selectedGarageId}"]`
         ) as HTMLElement | null;
@@ -114,7 +114,7 @@ useEffect(() => {
             block: "nearest",
           });
         }
-      }, 100);
+      });
     }
   }
 
@@ -160,7 +160,7 @@ useEffect(() => {
   );
 
   // 🔥 SORT HANDLER
-  const toggleSort = (key: keyof Garage) => {
+  const toggleSort = (key: keyof garageType) => {
     setPage(0);
 
     setSort((prev) => ({

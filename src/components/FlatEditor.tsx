@@ -249,65 +249,95 @@ const sortedPreview = [...preview].sort((a, b) => {
       {/* BULK */}
       {mode === "bulk" && (
         <div className="flex gap-3 flex-wrap">
-          <select
-            value={levelFilter}
-            onChange={(e) => setLevelFilter(e.target.value)}
-            className="border px-3 py-2 rounded"
-          >
-            <option value="">Wszystkie piętra</option>
-            <option value="0">Parter</option>
-            <option value="1">1 piętro</option>
-            <option value="2">2 piętro</option>
-            <option value="3">3 piętro</option>
-          </select>
 
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="border px-3 py-2 rounded"
-          >
-            <option value="">Wszystkie statusy</option>
-            <option value="dostępne">Dostępne</option>
-            <option value="rezerwacja">Rezerwacja</option>
-            <option value="sprzedane">Sprzedane</option>
-          </select>
+          <div className="flex flex-col">
+            <label className="text-xs mb-1 text-gray-500">
+              Piętro
+            </label>
+            <select
+              value={levelFilter}
+              onChange={(e) => setLevelFilter(e.target.value)}
+              className="border px-3 py-2 rounded"
+            >
+              <option value="">Wszystkie piętra</option>
+              <option value="0">Parter</option>
+              <option value="1">1 piętro</option>
+              <option value="2">2 piętro</option>
+              <option value="3">3 piętro</option>
+            </select>
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-xs mb-1 text-gray-500">
+              Status
+            </label>
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="border px-3 py-2 rounded"
+            >
+              <option value="">Wszystkie statusy</option>
+              <option value="dostępne">Dostępne</option>
+              <option value="rezerwacja">Rezerwacja</option>
+              <option value="sprzedane">Sprzedane</option>
+            </select>
+          </div>
+
         </div>
       )}
 
       {/* OPERACJE */}
       <div className="flex gap-3 flex-wrap">
 
-        <input
-          type="number"
-          placeholder="Cena m²"
-          value={priceMeter}
-          onChange={(e) => setPriceMeter(e.target.value)}
-          className="border px-3 py-2 rounded"
-        />
-        <select
-          value={roundMode}
-          onChange={(e) => setRoundMode(e.target.value as any)}
-          className="border px-3 py-2 rounded"
-        >
-          <option value="none">Bez zaokrąglenia</option>
-          <option value="100">Do 100 zł</option>
-          <option value="1000">Do 1000 zł</option>
-          <option value="10000">Do 10 000 zł</option>
-        </select>
+        {/* CENA */}
+        <div className="flex flex-col">
+          <label className="text-xs mb-1 text-gray-500">
+            Cena za m²
+          </label>
+          <input
+            type="number"
+            placeholder="np. 12000"
+            value={priceMeter}
+            onChange={(e) => setPriceMeter(e.target.value)}
+            className="border px-3 py-2 rounded"
+          />
+        </div>
 
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="border px-3 py-2 rounded"
-        >
-          <option value="">Bez zmiany statusu</option>
-          <option value="dostępne">Dostępne</option>
-          <option value="rezerwacja">Rezerwacja</option>
-          <option value="sprzedane">Sprzedane</option>
-        </select>
+        {/* ZAOKRĄGLANIE */}
+        <div className="flex flex-col">
+          <label className="text-xs mb-1 text-gray-500">
+            Zaokrąglenie
+          </label>
+          <select
+            value={roundMode}
+            onChange={(e) => setRoundMode(e.target.value as any)}
+            className="border px-3 py-2 rounded"
+          >
+            <option value="none">Bez zaokrąglenia</option>
+            <option value="100">Do 100 zł</option>
+            <option value="1000">Do 1000 zł</option>
+            <option value="10000">Do 10 000 zł</option>
+          </select>
+        </div>
+
+        {/* STATUS */}
+        <div className="flex flex-col">
+          <label className="text-xs mb-1 text-gray-500">
+            Status
+          </label>
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="border px-3 py-2 rounded"
+          >
+            <option value="">Bez zmiany statusu</option>
+            <option value="dostępne">Dostępne</option>
+            <option value="rezerwacja">Rezerwacja</option>
+            <option value="sprzedane">Sprzedane</option>
+          </select>
+        </div>
 
       </div>
-
       {/* PREVIEW */}
       {preview.length > 0 && (
         <div className="border p-3 rounded max-h-[200px] overflow-auto text-sm">

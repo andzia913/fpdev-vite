@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { HashLink } from "react-router-hash-link";

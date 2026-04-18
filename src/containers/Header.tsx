@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -19,10 +19,10 @@ const Header = () => {
     >
       {/* IMAGE */}
       <picture className="absolute inset-0 w-full ">
-        <source srcSet="/header-visual-s.jpg" media="(max-width: 450px)" />
-        <source srcSet="/header-visual-m.jpg" media="(max-width: 800px)" />
+        <source srcSet="/header-visual-s.webp" media="(max-width: 450px)" />
+        <source srcSet="/header-visual-m.webp" media="(max-width: 800px)" />
         <img
-          src="/header-visual.jpg"
+          src="/header-visual.webp"
           alt="Apartamenty Kaktusowa - nowe mieszkania Polkowice"
           className={`w-full object-cover transition-transform duration-700 h-[100vh] ${
             scrolled ? "scale-105" : "scale-100"

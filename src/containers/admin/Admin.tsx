@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
   type User,
 } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import { auth } from "../../config/firebase-auth";
 
 import AdminLogging from "../../components/admin/AdminLogging";
 import AdminForms from "../../components/admin/AdminForms";

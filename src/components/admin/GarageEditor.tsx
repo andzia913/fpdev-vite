@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { fetchGarages } from "../../containers/Garage";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import type { Garage } from "../../types/garages";
+import type { garageType } from "../../types/garages";
 import { formatPrice } from "../../utils/utils";
 
 const GarageEditor = () => {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
-  const [garages, setGarages] = useState<Garage[]>([]);
+  const [garages, setGarages] = useState<garageType[]>([]);
 
   const [mode, setMode] = useState<"single" | "bulk">("single");
 
@@ -20,7 +20,7 @@ const GarageEditor = () => {
   const [priceValue, setPriceValue] = useState("");
   const [statusValue, setStatusValue] = useState("");
 
-  const [preview, setPreview] = useState<Garage[]>([]);
+  const [preview, setPreview] = useState<garageType[]>([]);
 
   const [search, setSearch] = useState("");
   const [isOpenSuggestion, setIsOpenSuggestion] = useState<boolean>(false);
@@ -32,7 +32,7 @@ const GarageEditor = () => {
 
   const load = async () => {
     const data = await fetchGarages();
-    setGarages(data as Garage[]);
+    setGarages(data as garageType[]);
   };
     let suggestions = garages
     .filter((g) =>
@@ -207,62 +207,94 @@ const GarageEditor = () => {
       {/* BULK */}
       {mode === "bulk" && (
         <div className="flex gap-3 flex-wrap">
-            <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="border px-3 py-2 rounded"
-            >
-            <option value="">Wszystkie</option>
-            <option value="podziemne">Podziemne</option>
-            <option value="zewnetrzne">Zewnętrzne</option>
-            </select>
 
+          {/* TYP */}
+          <div className="flex flex-col">
+            <label className="text-xs mb-1 text-gray-500">
+              Typ miejsca
+            </label>
             <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="border px-3 py-2 rounded"
+              value={typeFilter}
+              onChange={(e) => setTypeFilter(e.target.value)}
+              className="border px-3 py-2 rounded"
             >
-            <option value="">Wszystkie statusy</option>
-            <option value="dostepne">Dostępne</option>
-            <option value="rezerwacja">Rezerwacja</option>
-            <option value="sprzedane">Sprzedane</option>
+              <option value="">Wszystkie</option>
+              <option value="podziemne">Podziemne</option>
+              <option value="zewnetrzne">Zewnętrzne</option>
             </select>
+          </div>
+
+          {/* STATUS */}
+          <div className="flex flex-col">
+            <label className="text-xs mb-1 text-gray-500">
+              Status
+            </label>
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="border px-3 py-2 rounded"
+            >
+              <option value="">Wszystkie statusy</option>
+              <option value="dostepne">Dostępne</option>
+              <option value="rezerwacja">Rezerwacja</option>
+              <option value="sprzedane">Sprzedane</option>
+            </select>
+          </div>
+
         </div>
       )}
 
       {/* OPERACJE */}
       <div className="flex gap-3 flex-wrap">
 
-        <select
+        {/* TRYB CENY */}
+        <div className="flex flex-col">
+          <label className="text-xs mb-1 text-gray-500">
+            Operacja na cenie
+          </label>
+          <select
             value={priceMode}
             onChange={(e) => setPriceMode(e.target.value as any)}
             className="border px-3 py-2 rounded"
-        >
+          >
             <option value="set">Ustaw cenę</option>
             <option value="add">Dodaj do ceny</option>
-        </select>
+          </select>
+        </div>
 
-        <input
+        {/* KWOTA */}
+        <div className="flex flex-col">
+          <label className="text-xs mb-1 text-gray-500">
+            Kwota
+          </label>
+          <input
             type="number"
+            inputMode="numeric"
             placeholder="np. 5000"
             value={priceValue}
             onChange={(e) => setPriceValue(e.target.value)}
             className="border px-3 py-2 rounded"
-        />
+          />
+        </div>
 
-        <select
+        {/* STATUS */}
+        <div className="flex flex-col">
+          <label className="text-xs mb-1 text-gray-500">
+            Nowy status
+          </label>
+          <select
             value={statusValue}
             onChange={(e) => setStatusValue(e.target.value)}
             className="border px-3 py-2 rounded"
-        >
+          >
             <option value="">Bez zmiany statusu</option>
             <option value="dostepne">Dostępne</option>
             <option value="rezerwacja">Rezerwacja</option>
             <option value="sprzedane">Sprzedane</option>
-        </select>
-
+          </select>
         </div>
 
+      </div>
       {/* PREVIEW */}
 {preview.length > 0 && (
   <div className="border p-3 rounded max-h-[200px] overflow-auto text-sm">

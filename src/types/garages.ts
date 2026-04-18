@@ -1,4 +1,4 @@
-export type Garage = {
+export type garageType = {
   id: string;
   type: "podziemne" | "zewnetrzne";
   status: "dostepne" | "rezerwacja" | "sprzedane";

@@ -1,4 +1,4 @@
-import React, { useState, lazy, Suspense } from "react";
+import { useState, lazy, Suspense } from "react";
 import Spinner from "../components/spinner/Spinner";
 import { OfferTable } from "../components";
 
