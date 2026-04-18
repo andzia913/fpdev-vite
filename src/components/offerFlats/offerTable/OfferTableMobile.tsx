@@ -1,6 +1,7 @@
 import { STATUS_CONFIG } from "../../../utils/statusOfFlat";
 import type { Flat } from "../../../types/flat";
 import { normalizeStatus } from "../../../utils/statusOfFlat";
+import { formatPrice } from "../../../utils/utils";
 
 const scrollToOffer = () => {
   const el = document.getElementById("offer");
@@ -54,7 +55,7 @@ const OfferTableMobile = ({ data, page, setPage, totalPages }: Props) => (
             <span className="font-semibold text-[var(--color-primary)]">
               {normalized === "sold"
                 ? "—"
-                : `${flat.priceOfFlat} zł`}
+                : `${formatPrice(flat.priceOfFlat)} zł`}
             </span>
           </div>
 

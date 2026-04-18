@@ -13,7 +13,7 @@ const DateForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-sm space-y-3 max-w-md">
+    <div className="bg-white p-6 rounded-xl shadow-sm space-y-3 max-w-md hidden">
 
       <h3 className="font-semibold">Data inwestycji</h3>
 

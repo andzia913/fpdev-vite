@@ -15,16 +15,16 @@ const Header = () => {
   return (
     <section
       id="inwestycja"
-      className="relative w-full h-[90vh] min-h-[600px] flex items-center"
+      className="relative w-full h-[100vh] min-h-[600px] flex items-center"
     >
       {/* IMAGE */}
-      <picture className="absolute inset-0 w-full h-full overflow-hidden">
+      <picture className="absolute inset-0 w-full ">
         <source srcSet="/header-visual-s.jpg" media="(max-width: 450px)" />
         <source srcSet="/header-visual-m.jpg" media="(max-width: 800px)" />
         <img
           src="/header-visual.jpg"
           alt="Apartamenty Kaktusowa - nowe mieszkania Polkowice"
-          className={`w-full h-full object-cover transition-transform duration-700 ${
+          className={`w-full object-cover transition-transform duration-700 h-[100vh] ${
             scrolled ? "scale-105" : "scale-100"
           }`}
         />

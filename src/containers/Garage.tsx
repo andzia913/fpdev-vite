@@ -174,7 +174,6 @@ useEffect(() => {
 
   return (
     <section id="garaze" className="max-w-7xl mx-auto px-6 lg:px-10 py-20">
-
       {/* HEADER */}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-semibold">

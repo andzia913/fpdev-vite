@@ -8,14 +8,12 @@ const OfferDetails = lazy(() => import("../components/OfferDetails"));
 const Offer = () => {
   const [view, setView] = useState<1 | 2 | 3>(1);
 
-  const changeOnOfferDetails = () => {
-    setView(3);
-  };
+
 
   const renderView = () => {
     switch (view) {
       case 1:
-        return <OfferTable changeOnOfferDetails={changeOnOfferDetails} />;
+        return <OfferTable/>;
       case 2:
         return <OfferPicture />;
       case 3:

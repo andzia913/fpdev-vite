@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { db } from "../config/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 type Props = {
   activeArticle: string | null;
@@ -6,8 +8,29 @@ type Props = {
 };
 
 const ArticleContent = ({ activeArticle, onClose }: Props) => {
-  if (!activeArticle) return null;
+  const [diaryData, setDiaryData] = useState<
+    { id: string; date: string; title: string }[]
+  >([]);
 
+  useEffect(() => {
+    const loadDiary = async () => {
+      const snapshot = await getDocs(collection(db, "diary"));
+
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as any;
+
+      setDiaryData(data);
+    };
+
+    loadDiary();
+  }, []);
+  if (!activeArticle) return null;
+  const formatDate = (date: string) => {
+    if (!date) return "";
+    return new Date(date).toLocaleDateString("pl-PL");
+  };
   const renderContent = () => {
     switch (activeArticle) {
       case "Bezpieczny kredyt 2%":
@@ -146,8 +169,39 @@ const ArticleContent = ({ activeArticle, onClose }: Props) => {
           </>
         );
 
-      case "Dziennik budowy":
-        return <p>Już niedługo pojawią się tutaj aktualizacje z budowy 👷‍♂️</p>;
+        case "Dziennik budowy":
+          return (
+            <div className="space-y-4 max-h-[400px] overflow-auto">
+
+              {diaryData.length === 0 && (
+                <p className="text-gray-400">
+                  Brak wpisów
+                </p>
+              )}
+
+              {diaryData
+                .sort((a, b) => b.date.localeCompare(a.date)) // najnowsze na górze
+                .map((entry) => (
+                  <div
+                    key={entry.id}
+                    className="border-b pb-3 last:border-none"
+                  >
+
+                    {/* DATA */}
+                    <div className="text-xs text-gray-400 mb-1">
+                      {formatDate(entry.date)}
+                    </div>
+
+                    {/* OPIS */}
+                    <div className="text-sm text-gray-700">
+                      {entry.title}
+                    </div>
+
+                  </div>
+                ))}
+
+            </div>
+          );
 
       case "Doradztwo kredytowe":
         return (

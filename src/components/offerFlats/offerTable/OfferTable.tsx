@@ -19,7 +19,7 @@ const parseFlatNumber = (val: string) => {
   };
 };
 
-const OfferTable = ({ changeOnOfferDetails }: any) => {
+const OfferTable = () => {
   const { flatsData } = useFlatsData() as { flatsData: Flat[] };
   const [filtered, setFiltered] = useState<Flat[]>([]);
   const [page, setPage] = useState(0);
@@ -42,20 +42,31 @@ const OfferTable = ({ changeOnOfferDetails }: any) => {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (flatsData.length > 0) {
-      setFiltered(flatsData);
-      setIsLoading(false);
-    }
-  }, [flatsData]);
+useEffect(() => {
+  if (flatsData.length > 0) {
+    const normalized = flatsData.map((flat) => ({
+      ...flat,
+      priceOfFlat: Number(flat.priceOfFlat) || 0,
+      priceOfMeter: Number(flat.priceOfMeter) || 0,
+      surface: Number(flat.surface) || 0,
+    }));
+
+    setFiltered(normalized);
+    setIsLoading(false);
+  }
+}, [flatsData]);
 
   // FILTER + SORT
   useEffect(() => {
-    let data = [...flatsData];
+    let data = flatsData.map((flat) => ({
+      ...flat,
+      priceOfFlat: Number(flat.priceOfFlat) || 0,
+      surface: Number(flat.surface) || 0,
+    }));
 
     data = data.filter((flat) => {
-      const price = Number(flat.priceOfFlat.replace(".", ""));
-      const surface = Number(flat.surface);
+      const price = Number(flat.priceOfFlat) || 0;
+      const surface = Number(flat.surface) || 0;
 
       return (
         (!filters.status || flat.statute === filters.status) &&
@@ -73,15 +84,15 @@ const OfferTable = ({ changeOnOfferDetails }: any) => {
 
       // PRICE
       if (sort.key === "priceOfFlat") {
-        const priceA = Number(a.priceOfFlat?.replace(".", "") || 0);
-        const priceB = Number(b.priceOfFlat?.replace(".", "") || 0);
+        const priceA = Number(a.priceOfFlat) || 0;
+        const priceB = Number(b.priceOfFlat) || 0;
         return (priceA - priceB) * dir;
       }
 
       // SURFACE
       if (sort.key === "surface") {
-        const surfaceA = Number(a.surface || 0);
-        const surfaceB = Number(b.surface || 0);
+        const surfaceA = Number(a.surface) || 0;
+        const surfaceB = Number(b.surface) || 0;
         return (surfaceA - surfaceB) * dir;
       }
 

@@ -1,6 +1,8 @@
 import FlatEditor from "../FlatEditor";
 import DateForm from "../DateForm";
 import DiaryForm from "../DairyForm";
+import GarageEditor from "./GarageEditor";
+
 
 const AdminForms = ({ handleLogOut }: any) => {
   return (
@@ -16,6 +18,7 @@ const AdminForms = ({ handleLogOut }: any) => {
       </div>
 
       <FlatEditor />
+      <GarageEditor />
       <DateForm />
       <DiaryForm />
 

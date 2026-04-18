@@ -3,5 +3,5 @@ export type Garage = {
   type: "podziemne" | "zewnetrzne";
   status: "dostepne" | "rezerwacja" | "sprzedane";
   price: number;
-  disabled?: boolean; 
+  disabled?: boolean | undefined; 
 };

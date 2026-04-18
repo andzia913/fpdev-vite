@@ -2,6 +2,7 @@ import type { Flat } from "../../../types/flat";
 import { TiArrowUnsorted ,  TiArrowSortedDown ,  TiArrowSortedUp } from "react-icons/ti";
 import { STATUS_CONFIG } from "../../../utils/statusOfFlat";
 import { normalizeStatus } from "../../../utils/statusOfFlat";
+import { formatPrice } from "../../../utils/utils";
 
 type Sort = {
   key: keyof Flat;
@@ -48,7 +49,6 @@ const OfferTableDesktop = ({
   setPage,
   totalPages,
 }: Props) => {
-  const pages = getPagination(page, totalPages);
 
   return (
     <div className="hidden md:block">
@@ -130,7 +130,10 @@ const OfferTableDesktop = ({
               <td className="px-4 py-4 text-center">{flat.level}</td>
               <td className="px-4 py-4 text-center">{flat.numberOfRooms}</td>
               <td className="px-4 py-4 text-center">{flat.surface} m²</td>
-              <td className="px-4 py-4 text-center">{flat.priceOfFlat} zł</td>
+              <td className="px-4 py-4 text-center">              
+                {normalized === "sold"
+                ? "—"
+                : `${formatPrice(flat.priceOfFlat)} zł`}</td>
 
               <td className="text-center">
               <span className={`px-2 py-1 rounded text-xs  ${config.badge}`}>

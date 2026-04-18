@@ -28,9 +28,13 @@ const OfferDetails = () => {
           <p className="text-sm text-[var(--color-text-muted)] mb-2">
             31–77 m²
           </p>
-          <p className="text-sm text-[var(--color-text-muted)]">
-            Parking podziemny – 44 miejsca
-          </p>
+          <div className="mt-4 p-3 rounded-lg bg-[var(--color-primary)]/10 text-xs leading-relaxed">
+            W pierwszym etapie dostępnych jest 33 miejsca parkingowe.
+            <br />
+            Możliwy zakup maksymalnie 1 miejsca na mieszkanie.
+            <br />
+            Niewykupione miejsca mogą być dostępne dla innych klientów.
+          </div>
         </div>
 
         {/* ETAP 2 */}

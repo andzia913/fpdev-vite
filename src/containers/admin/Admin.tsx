@@ -7,8 +7,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
 
-import AdminLogging from "../../components/adminLogging/AdminLogging";
-import AdminForms from "../../components/adminForms/AdminForms";
+import AdminLogging from "../../components/admin/AdminLogging";
+import AdminForms from "../../components/admin/AdminForms";
 
 const Admin = () => {
   const [user, setUser] = useState<User | null>(null);

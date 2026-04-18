@@ -83,7 +83,7 @@ const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
               style={{
                 fill: config?.mapColor || "rgba(255,255,255,0.2)",
                 opacity: hovered?.id === area.id ? 0.7 : 1,
-                stroke: isSelected ? "#000" : "none",
+                stroke: isSelected ? "#ff0000" : "none",
                 strokeWidth: isSelected ? 4 : 0,
               }}
             />

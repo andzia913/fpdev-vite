@@ -3,6 +3,8 @@ import generateAreaProperties from '../../../utils/statusOfFlat';
 const secondFloor = {
   name: 'secondFloor',
   key: 'secondFloor',
+  width: 1578,
+  height: 749,
   src: 'flats/drugie-piętro_Kaktusowa.png',
   areas: [
     {
