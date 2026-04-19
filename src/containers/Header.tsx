@@ -15,10 +15,10 @@ const Header = () => {
   return (
     <section
       id="inwestycja"
-      className="relative w-full h-[100vh] min-h-[600px] flex items-center"
+      className="relative w-full h-[100vh] min-h-[600px] flex items-center overflow-hidden"
     >
       {/* IMAGE */}
-      <picture className="absolute inset-0 w-full ">
+      <picture className="absolute inset-0 w-full overflow-hidden">
         <source srcSet="/header-visual-s.webp" media="(max-width: 450px)" />
         <source srcSet="/header-visual-m.webp" media="(max-width: 800px)" />
         <img

@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Layout from './components/Layout';
 import NotFound from './pages/PageNotFound';
 import ScrollToTop from './components/ScrollToTop';
+import BezpiecznyKredyt from './pages/SafeCredit';
+import ZmianyLokatorskie from './pages/Changing';
 
 const App = () => (
   <>
@@ -13,6 +15,8 @@ const App = () => (
         <Route element={  <Layout />  }>
           <Route path="/" element={  <Home />  }/>
           <Route path="/wykonczenie-pod-klucz" element={  <Turnkey />  }/>
+          <Route path="/bezpieczny-kredyt-polkowice" element={<BezpiecznyKredyt />} />
+          <Route path="/zmiany-lokatorskie" element={<ZmianyLokatorskie />} />
         </Route>
         <Route path="/admin" element={  <Admin />  }/>
         <Route path="*" element={<NotFound />} />

@@ -27,13 +27,7 @@ const OfferDetails = () => {
           <p className="text-sm text-[var(--color-text-muted)] mb-2">
             31–77 m²
           </p>
-          <div className="mt-4 p-3 rounded-lg bg-[var(--color-primary)]/10 text-xs leading-relaxed">
-            W pierwszym etapie dostępnych jest 33 miejsca parkingowe.
-            <br />
-            Możliwy zakup maksymalnie 1 miejsca na mieszkanie.
-            <br />
-            Niewykupione miejsca mogą być dostępne dla innych klientów.
-          </div>
+          
         </div>
 
         {/* ETAP 2 */}
@@ -63,7 +57,13 @@ const OfferDetails = () => {
         </div>
 
       </div>
-
+      <div className="p-4 rounded-lg bg-[var(--color-primary)]/10 text-xs leading-relaxed mb-6">
+            W pierwszym etapie dostępnych jest 33 miejsca parkingowe w garażu podziemnym.
+            <br />
+            Możliwy zakup maksymalnie 1 miejsca na mieszkanie.
+            <br />
+            Niewykupione miejsca mogą być dostępne dla innych klientów.
+          </div>
       {/* STANDARD */}
       <div className="bg-white rounded-2xl shadow-sm border p-6 md:p-10">
 

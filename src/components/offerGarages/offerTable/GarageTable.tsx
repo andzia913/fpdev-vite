@@ -88,6 +88,8 @@ const GarageTable = ({ data, toggleSort, sort, selectedId, onSelect }: Props) =>
                   className={`bg-white shadow-sm cursor-pointer transition
                     ${selectedId === g.id ? "ring-2 ring-[var(--color-primary)]" : ""}
                   `}
+                    style={{ WebkitTapHighlightColor: "transparent" }}
+                    role="button"
                 >
 
                 <td className="px-3 py-3 font-semibold">

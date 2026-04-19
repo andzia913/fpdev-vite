@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { STATUS_CONFIG, normalizeStatus } from "../../utils/statusOfFlat";
 import cords from "./garageCords.json";
 
@@ -26,14 +26,22 @@ const CONFIG = {
 
 const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
   const [hovered, setHovered] = useState<any>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const { image, coords, viewBox, alt } = CONFIG[type];
+
+  // 🔥 reset przy zmianie typu (żeby nie było ghostów)
+  useEffect(() => {
+    setHovered(null);
+    setImageLoaded(false);
+  }, [type]);
 
   const garageMap = Object.fromEntries(
     garages.map((g) => [g.id, g])
   );
 
- const handleClick = (id: string) => {
+  const handleClick = (id: string) => {
+    setHovered(null);
     onSelect?.(id);
 
     const table = document.getElementById("garageTable");
@@ -42,6 +50,7 @@ const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
     const rect = table.getBoundingClientRect();
     const isVisible =
       rect.top >= 0 && rect.bottom <= window.innerHeight;
+
     if (!isVisible) {
       table.scrollIntoView({
         behavior: "smooth",
@@ -53,48 +62,58 @@ const GarageMap = ({ garages, type, onSelect, selectedId }: Props) => {
   return (
     <div className="relative w-full max-w-[800px] mx-auto" id="garageMap">
 
-      <img src={image} className="w-full" alt={alt} />
+      {/* IMAGE */}
+      <img
+        src={image}
+        alt={alt}
+        onLoad={() => setImageLoaded(true)}
+        className={`w-full transition-opacity duration-300 ${
+          imageLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
 
-      <svg
-        className="absolute top-0 left-0 w-full h-full"
-        viewBox={viewBox}
-      >
-        {coords.map((area: any) => {
-          const data = garageMap[area.id];
+      {/* SVG dopiero po załadowaniu */}
+      {imageLoaded && (
+        <svg
+          className="absolute top-0 left-0 w-full h-full"
+          viewBox={viewBox}
+        >
+          {coords.map((area: any) => {
+            const data = garageMap[area.id];
 
-          const normalized = normalizeStatus(data?.status);
-          const config = STATUS_CONFIG[normalized];
+            const normalized = normalizeStatus(data?.status);
+            const config = STATUS_CONFIG[normalized];
 
-          const [x1, y1, x2, y2] = area.coords;
+            const [x1, y1, x2, y2] = area.coords;
+            const isSelected = selectedId === area.id;
 
-          const isSelected = selectedId === area.id;
-
-          return (
-            <rect
-              key={area.id}
-              x={Math.min(x1, x2)}
-              y={Math.min(y1, y2)}
-              width={Math.abs(x2 - x1)}
-              height={Math.abs(y2 - y1)}
-              onClick={() => handleClick(area.id)}
-              onMouseEnter={() =>
-                setHovered({ ...area, status: normalized })
-              }
-              onMouseLeave={() => setHovered(null)}
-              className="cursor-pointer transition-all duration-200"
-              style={{
-                fill: config?.mapColor || "rgba(255,255,255,0.2)",
-                opacity: hovered?.id === area.id ? 0.7 : 1,
-                stroke: isSelected ? "#ff0000" : "none",
-                strokeWidth: isSelected ? 4 : 0,
-              }}
-            />
-          );
-        })}
-      </svg>
+            return (
+              <rect
+                key={area.id}
+                x={Math.min(x1, x2)}
+                y={Math.min(y1, y2)}
+                width={Math.abs(x2 - x1)}
+                height={Math.abs(y2 - y1)}
+                onClick={() => handleClick(area.id)}
+                onMouseEnter={() =>
+                  setHovered({ ...area, status: normalized })
+                }
+                onMouseLeave={() => setHovered(null)}
+                className="cursor-pointer transition-all duration-200"
+                style={{
+                  fill: config?.mapColor || "rgba(255,255,255,0.2)",
+                  opacity: hovered?.id === area.id ? 0.7 : 1,
+                  stroke: isSelected ? "#ff0000" : "none",
+                  strokeWidth: isSelected ? 4 : 0,
+                }}
+              />
+            );
+          })}
+        </svg>
+      )}
 
       {/* TOOLTIP */}
-      {hovered && (
+      {hovered && imageLoaded && (
         <div className="absolute top-4 left-1/2 -translate-x-1/2 
           bg-black text-white px-3 py-2 text-sm rounded shadow flex gap-2">
 

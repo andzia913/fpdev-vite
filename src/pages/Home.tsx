@@ -6,6 +6,7 @@ import Blog from "../containers/Blog";
 import Location from "../components/Location";
 import Garage from "../containers/Garage";
 import { Helmet } from "react-helmet-async";
+import Faq from "../containers/Faq";
 const Home = () => {
   return (
     <>
@@ -24,6 +25,7 @@ const Home = () => {
       <Offer />
       <Garage />
       <Location />
+      <Faq />
       <Blog />
     </>
   )

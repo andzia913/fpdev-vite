@@ -14,6 +14,10 @@ const Blog = () => {
   const handleArticleClick = (title: string) => {
     if (title === "Wykończenie pod klucz") {
       navigate("/wykonczenie-pod-klucz");
+    } else if (title === "Bezpieczny kredyt 2%") {
+      navigate("/bezpieczny-kredyt-polkowice");
+    }else if (title === "Zmiany lokatorskie") {
+      navigate("/zmiany-lokatorskie");
     } else {
       setActiveArticle(title);
     }
@@ -38,7 +42,7 @@ const Blog = () => {
     <Article
       imgUrl="/safe-credit.webp"
       alt="bezpieczny kredyt"
-      handleActiveArticle={setActiveArticle}
+      handleActiveArticle={handleArticleClick}
       date="Bezpieczny kredyt 2%"
       text="Czy możesz skorzystać z dopłaty rządowej?"
     />
