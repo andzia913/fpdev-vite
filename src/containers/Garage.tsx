@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import GarageTable from "../components/offerGarages/offerTable/GarageTable";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
@@ -34,6 +34,28 @@ const Garage = () => {
   const [page, setPage] = useState(0);
   const perPage = 10;
 
+  // 🔥 DETEKCJA SCROLLA USERA
+  const isUserScrolling = useRef(false);
+
+  useEffect(() => {
+    let timeout: any;
+
+    const onScroll = () => {
+      isUserScrolling.current = true;
+
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        isUserScrolling.current = false;
+      }, 150);
+    };
+
+    window.addEventListener("scroll", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   // 🔥 LOAD
   useEffect(() => {
     const load = async () => {
@@ -65,7 +87,7 @@ const Garage = () => {
       : String(valB).localeCompare(String(valA));
   });
 
-  // 🔥 AUTO PAGE SWITCH — tylko z mapy
+  // 🔥 AUTO PAGE SWITCH (mapa)
   useEffect(() => {
     if (!selectedGarageId) return;
     if (selectionSource !== "map") return;
@@ -80,24 +102,43 @@ const Garage = () => {
     }
   }, [selectedGarageId, sorted, selectionSource]);
 
-  // 🔥 AUTO PAGE SWITCH + SCROLL (JEDNO MIEJSCE)
-useEffect(() => {
-  if (!selectedGarageId) return;
+  // 🔥 SCROLL FIX (najważniejsze)
+  useEffect(() => {
+    if (!selectedGarageId) return;
 
-  const index = sorted.findIndex((g) => g.id === selectedGarageId);
-  if (index === -1) return;
+    const index = sorted.findIndex((g) => g.id === selectedGarageId);
+    if (index === -1) return;
 
-  const newPage = Math.floor(index / perPage);
+    const newPage = Math.floor(index / perPage);
+    const isMobile = window.innerWidth < 1024;
 
-  const isMobile = window.innerWidth < 1024;
+    // 🔥 MAP CLICK
+    if (selectionSource === "map" && newPage !== page) {
+      setPage(newPage);
 
-  // 🔥 zmiana strony tylko z mapy
-  if (selectionSource === "map" && newPage !== page) {
-    setPage(newPage);
+      if (isMobile) {
+        setTimeout(() => {
+          if (isUserScrolling.current) return;
 
-    // 🔥 scroll tylko mobile
-    if (isMobile) {
-      requestAnimationFrame(() => {
+          const row = document.querySelector(
+            `[data-id="${selectedGarageId}"]`
+          ) as HTMLElement | null;
+
+          if (!row) return;
+
+          row.scrollIntoView({
+            behavior: "auto", // 🔥 KLUCZ
+            block: "nearest",
+          });
+        }, 60);
+      }
+    }
+
+    // 🔥 TABLE CLICK
+    if (selectionSource === "table" && isMobile) {
+      setTimeout(() => {
+        if (isUserScrolling.current) return;
+
         const row = document.querySelector(
           `[data-id="${selectedGarageId}"]`
         ) as HTMLElement | null;
@@ -110,40 +151,15 @@ useEffect(() => {
 
         if (!isVisible) {
           row.scrollIntoView({
-            behavior: "smooth",
+            behavior: "auto", // 🔥 bez smooth
             block: "nearest",
           });
         }
-      });
+      }, 30);
     }
-  }
+  }, [selectedGarageId, selectionSource, sorted]);
 
-  // 🔥 klik w tabeli → tylko ewentualny scroll (bez zmiany page)
-  if (selectionSource === "table") {
-    const row = document.querySelector(
-      `[data-id="${selectedGarageId}"]`
-    ) as HTMLElement | null;
-
-    if (!row) return;
-
-    const isMobile = window.innerWidth < 1024;
-
-    if (!isMobile) return;
-
-    const rect = row.getBoundingClientRect();
-    const isVisible =
-      rect.top >= 0 && rect.bottom <= window.innerHeight;
-
-    if (!isVisible) {
-      row.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
-  }
-}, [selectedGarageId, selectionSource, sorted]);
-
-  // 🔥 reset source (żeby nie blokowało paginacji)
+  // 🔥 reset source
   useEffect(() => {
     if (!selectionSource) return;
 
@@ -159,7 +175,7 @@ useEffect(() => {
     page * perPage + perPage
   );
 
-  // 🔥 SORT HANDLER
+  // 🔥 SORT
   const toggleSort = (key: keyof garageType) => {
     setPage(0);
 
@@ -174,7 +190,6 @@ useEffect(() => {
 
   return (
     <section id="garaze" className="max-w-7xl mx-auto px-6 lg:px-10 py-20">
-      {/* HEADER */}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-semibold">
           Miejsca parkingowe
@@ -184,7 +199,6 @@ useEffect(() => {
         </p>
       </div>
 
-      {/* SWITCH */}
       <div className="flex justify-center gap-4 mb-10">
         <button
           onClick={() => {
@@ -215,7 +229,6 @@ useEffect(() => {
         </button>
       </div>
 
-      {/* LICZNIK */}
       <div className="text-center mb-6 text-sm text-gray-600">
         Dostępnych:{" "}
         <span className="font-semibold text-green-600">
@@ -224,23 +237,17 @@ useEffect(() => {
         / {total}
       </div>
 
-      {/* CONTENT */}
       <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <GarageMap
+          garages={filtered}
+          type={filter}
+          selectedId={selectedGarageId}
+          onSelect={(id) => {
+            setSelectionSource("map");
+            setSelectedGarageId(id);
+          }}
+        />
 
-        {/* MAPA */}
-        <div>
-          <GarageMap
-            garages={filtered}
-            type={filter}
-            selectedId={selectedGarageId}
-            onSelect={(id) => {
-              setSelectionSource("map");
-              setSelectedGarageId(id);
-            }}
-          />
-        </div>
-
-        {/* TABELA */}
         <div>
           <GarageTable
             data={paginated}
@@ -253,20 +260,16 @@ useEffect(() => {
             }}
           />
 
-          {/* PAGINACJA */}
           <div className="flex items-center justify-between mt-6 gap-4">
-
             <button
               onClick={() => setPage(Math.max(page - 1, 0))}
               disabled={page === 0}
-              className="flex-1 py-3 rounded-xl border text-sm font-medium
-                disabled:opacity-30 disabled:cursor-not-allowed
-                active:scale-95 transition"
+              className="flex-1 py-3 rounded-xl border text-sm font-medium disabled:opacity-30"
             >
               ← Poprzednie
             </button>
 
-            <div className="text-sm text-gray-600 whitespace-nowrap">
+            <div className="text-sm text-gray-600">
               {page + 1} / {totalPages}
             </div>
 
@@ -275,16 +278,12 @@ useEffect(() => {
                 setPage(Math.min(page + 1, totalPages - 1))
               }
               disabled={page === totalPages - 1}
-              className="flex-1 py-3 rounded-xl bg-[var(--color-primary)] text-white text-sm font-medium
-                disabled:opacity-30 disabled:cursor-not-allowed
-                active:scale-95 transition"
+              className="flex-1 py-3 rounded-xl bg-[var(--color-primary)] text-white text-sm font-medium disabled:opacity-30"
             >
               Następne →
             </button>
-
           </div>
         </div>
-
       </div>
     </section>
   );

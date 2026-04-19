@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import { HashLink } from "react-router-hash-link";
@@ -14,9 +14,18 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-100 shadow-sm">
-      
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 py-3">
+    <nav
+      className="
+        sticky top-0 left-0 w-full z-50
+        bg-white border-b border-gray-100 shadow-sm
+        will-change-transform
+      "
+      style={{
+        transform: "translateZ(0)", // 🔥 iOS fix
+        backfaceVisibility: "hidden",
+      }}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 h-[72px]">
 
         {/* LOGO */}
         <a href="/" className="flex items-center">
@@ -46,7 +55,6 @@ const Navbar = () => {
         {/* RIGHT */}
         <div className="hidden md:flex items-center gap-6">
 
-          {/* PHONE */}
           <a
             href="tel:+48530222904"
             className="text-base font-medium text-gray-700 hover:text-[var(--color-primary)] transition"
@@ -54,7 +62,6 @@ const Navbar = () => {
             530 222 904
           </a>
 
-          {/* CTA */}
           <HashLink
             smooth
             to="/#offer"
