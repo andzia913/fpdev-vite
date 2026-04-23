@@ -186,7 +186,8 @@ const Garage = () => {
           ? "desc"
           : "asc",
     }));
-  };
+  };console.log(paginated)
+  console.log(filtered)
 
   return (
     <section id="garaze" className="max-w-7xl mx-auto px-6 lg:px-10 py-20">

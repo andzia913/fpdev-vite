@@ -58,12 +58,8 @@ const OfferDetails = () => {
 
       </div>
       <div className="p-4 rounded-lg bg-[var(--color-primary)]/10 text-xs leading-relaxed mb-6">
-            W pierwszym etapie dostępnych jest 33 miejsca parkingowe w garażu podziemnym.
-            <br />
-            Możliwy zakup maksymalnie 1 miejsca na mieszkanie.
-            <br />
-            Niewykupione miejsca mogą być dostępne dla innych klientów.
-          </div>
+            W pierwszym etapie dostępnych jest 11 miejsc parkingowych w garażu podziemnym oraz miejsca zewnętrzne.
+            </div>
       {/* STANDARD */}
       <div className="bg-white rounded-2xl shadow-sm border p-6 md:p-10">
 

@@ -43,6 +43,8 @@ export const normalizeStatus = (status: string) => {
       return "reserved";
     case "sprzedane":
       return "sold";
+    case "niedostepne":
+      return "notAvailable";
     default:
       return "available";
   }
@@ -53,6 +55,11 @@ export const STATUS_CONFIG = {
     label: "Dostępne",
     mapColor: "rgba(34,197,94,0.4)",
     badge: "bg-green-100 text-green-700",
+  },
+  notAvailable: {
+    label: "Niedostępne",
+    mapColor: "rgba(107,114,128,0.4)",
+    badge: "bg-gray-100 text-gray-700",
   },
   reserved: {
     label: "Rezerwacja",

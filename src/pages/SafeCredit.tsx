@@ -112,10 +112,10 @@ const BezpiecznyKredyt = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
 
             <a
-              href="tel:+48507126941"
+              href="tel:+48530222904"
               className="bg-white text-black px-6 py-3 rounded-md font-medium hover:opacity-90 transition flex items-center gap-2 justify-center"
             >
-              <FiPhone /> 507 126 941
+              <FiPhone /> 530 222 904
             </a>
 
             <a

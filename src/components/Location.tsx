@@ -93,10 +93,10 @@ const Location = () => {
             <div className="flex flex-wrap gap-3">
 
               <a
-                href="tel:+48539146127"
+                href="tel:+48884288898"
                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-primary)] text-white text-sm shadow hover:scale-105 transition"
               >
-                <FiPhone /> 539 146 127
+                <FiPhone /> 884 288 898
               </a>
 
               <a

@@ -52,8 +52,8 @@ const Footer = () => {
       </p>
     </div>
 
-    <a href="tel:+48507126941" className="flex items-center gap-2 hover:text-white transition">
-      <FiPhone /> 507 126 941
+    <a href="tel:+48530222904" className="flex items-center gap-2 hover:text-white transition">
+      <FiPhone /> 530 222 904
     </a>
 
     <a href="mailto:cuf.polkowice@poczta.fm" className="flex items-center gap-2 hover:text-white transition">

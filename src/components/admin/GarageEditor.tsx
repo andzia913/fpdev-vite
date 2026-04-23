@@ -236,6 +236,7 @@ const GarageEditor = () => {
             >
               <option value="">Wszystkie statusy</option>
               <option value="dostepne">Dostępne</option>
+              <option value="niedostepne">Niedostępne</option>
               <option value="rezerwacja">Rezerwacja</option>
               <option value="sprzedane">Sprzedane</option>
             </select>
@@ -289,6 +290,7 @@ const GarageEditor = () => {
           >
             <option value="">Bez zmiany statusu</option>
             <option value="dostepne">Dostępne</option>
+            <option value="niedostepne">Niedostępne</option>
             <option value="rezerwacja">Rezerwacja</option>
             <option value="sprzedane">Sprzedane</option>
           </select>

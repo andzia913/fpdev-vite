@@ -122,10 +122,10 @@ const ArticleContent = ({ activeArticle, onClose }: Props) => {
 
               <div className="flex flex-wrap gap-3 mt-3">
                 <a
-                  href="tel:+48507126941"
+                  href="tel:+48530222904"
                   className="px-4 py-2 bg-[var(--color-primary)] text-white rounded"
                 >
-                  📞 507 126 941
+                  📞 530 222 904
                 </a>
               </div>
             </div>

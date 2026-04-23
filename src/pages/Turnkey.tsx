@@ -131,10 +131,10 @@ const Turnkey = () => {
 
         <div className="mt-6 flex justify-center gap-4 ">
           <a
-            href="tel:+48507126941"
+            href="tel:+48530222904"
             className="bg-white text-black px-6 py-3 rounded-lg flex items-center gap-2"
           >
-            <FiPhone /> 507 126 941
+            <FiPhone /> 530 222 904
           </a>
 
           <a

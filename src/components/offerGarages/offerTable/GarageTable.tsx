@@ -77,8 +77,7 @@ const GarageTable = ({ data, toggleSort, sort, selectedId, onSelect }: Props) =>
             const normalized = normalizeStatus(g.status);
 
             const config =
-              STATUS_CONFIG[normalized as keyof typeof STATUS_CONFIG] ||
-              STATUS_CONFIG.available;
+              STATUS_CONFIG[normalized as keyof typeof STATUS_CONFIG]
 
             return (
                 <tr
